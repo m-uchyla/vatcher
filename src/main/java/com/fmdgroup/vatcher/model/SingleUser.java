@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class SingleUser {
 
 @Id
 @GeneratedValue(strategy=GenerationType.AUTO)
@@ -17,9 +17,9 @@ private String name;
 private String email;
 private String password;
 
-public User() {}
+public SingleUser() {}
 
-public User(String name, String email, String password) {
+public SingleUser(String name, String email, String password) {
 	super();
 	this.name = name;
 	this.email = email;
@@ -63,7 +63,7 @@ public boolean equals(Object obj) {
 		return false;
 	if (getClass() != obj.getClass())
 		return false;
-	User other = (User) obj;
+	SingleUser other = (SingleUser) obj;
 	return Objects.equals(email, other.email) && Objects.equals(name, other.name)
 			&& Objects.equals(password, other.password);
 }

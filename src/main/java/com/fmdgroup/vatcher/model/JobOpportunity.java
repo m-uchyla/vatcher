@@ -21,9 +21,9 @@ public class JobOpportunity {
 	private String location;
 	private String duration;
 	private String description;
-	private Set<String> skills;
-	private Set<Trainee> applicants;
-	private Set<Match> matches;
+//	private Set<String> skills;
+//	private Set<Trainee> applicants;
+//	private Set<Match> matches;
 	
 	public JobOpportunity() {}
 
@@ -35,9 +35,9 @@ public class JobOpportunity {
 		this.location = location;
 		this.duration = duration;
 		this.description = description;
-		this.skills = skills;
-		this.applicants = applicants;
-		this.matches = matches;
+//		this.skills = skills;
+//		this.applicants = applicants;
+//		this.matches = matches;
 	}
 
 	public Long getJob_id() {
@@ -88,28 +88,28 @@ public class JobOpportunity {
 		this.description = description;
 	}
 
-	public Set<String> getSkills() {
-		return skills;
-	}
-
-	public void setSkills(Set<String> skills) {
-		this.skills = skills;
-	}
-
-	public Set<Trainee> getApplicants() {
-		return applicants;
-	}
-
-	public void setApplicants(Set<Trainee> applicants) {
-		this.applicants = applicants;
-	}
-
-	public Set<Match> getMatches() {
-		return matches;
-	}
-
-	public void setMatches(Set<Match> matches) {
-		this.matches = matches;
-	};
+//	public Set<String> getSkills() {
+//		return skills;
+//	}
+//
+//	public void setSkills(Set<String> skills) {
+//		this.skills = skills;
+//	}
+//
+//	public Set<Trainee> getApplicants() {
+//		return applicants;
+//	}
+//
+//	public void setApplicants(Set<Trainee> applicants) {
+//		this.applicants = applicants;
+//	}
+//
+//	public Set<Match> getMatches() {
+//		return matches;
+//	}
+//
+//	public void setMatches(Set<Match> matches) {
+//		this.matches = matches;
+//	};
 	
 }

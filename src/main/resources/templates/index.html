@@ -12,10 +12,10 @@
 				<th>Email</th>
 				<th>Password</th>
 			</tr>
-			<tr th:each="User : ${users}">
-				<td th:text="${user.name}">Monika</td>
-				<td th:text="${user.email}">monia@monia</td>
-				<td th:text="${user.password}">Monikatoja</td>
+			<tr th:each="user : ${users}">
+				<td th:text="${user.name}"></td>
+				<td th:text="${user.email}"></td>
+				<td th:text="${user.password}"></td>
 			</tr>
 		</table>
 </body>

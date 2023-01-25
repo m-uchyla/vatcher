@@ -17,10 +17,10 @@ public class Match {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	private Long id;
-	@Column
-	private Trainee trainee;
-	@Column
-	private JobOpportunity jobopportunity;
+//	@Column
+//	private Trainee trainee;
+//	@Column
+//	private JobOpportunity jobopportunity;
 	@Column
 	private String status;
 	@Column
@@ -32,8 +32,8 @@ public class Match {
 	
 	public Match(Trainee trainee, JobOpportunity jobopportunity, String status, Date matchedOn) {
 		super();
-		this.trainee = trainee;
-		this.jobopportunity = jobopportunity;
+//		this.trainee = trainee;
+//		this.jobopportunity = jobopportunity;
 		this.status = status;
 		this.matchedOn = matchedOn;
 	}
@@ -43,21 +43,21 @@ public class Match {
 		return id;
 	}
 
-	public Trainee getTrainee() {
-		return trainee;
-	}
-
-	public void setTrainee(Trainee trainee) {
-		this.trainee = trainee;
-	}
-
-	public JobOpportunity getJobopportunity() {
-		return jobopportunity;
-	}
-
-	public void setJobopportunity(JobOpportunity jobopportunity) {
-		this.jobopportunity = jobopportunity;
-	}
+//	public Trainee getTrainee() {
+//		return trainee;
+//	}
+//
+//	public void setTrainee(Trainee trainee) {
+//		this.trainee = trainee;
+//	}
+//
+//	public JobOpportunity getJobopportunity() {
+//		return jobopportunity;
+//	}
+//
+//	public void setJobopportunity(JobOpportunity jobopportunity) {
+//		this.jobopportunity = jobopportunity;
+//	}
 
 	public String getStatus() {
 		return status;

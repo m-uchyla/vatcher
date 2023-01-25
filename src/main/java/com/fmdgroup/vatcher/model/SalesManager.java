@@ -8,32 +8,32 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class SalesManager extends User {
+public class SalesManager extends SingleUser {
 		
 		
 		@Id
 		@GeneratedValue(strategy = GenerationType.AUTO)
 		private Long id;
-		private List<JobOpportunity> jobOpportunities;
+		//private List<JobOpportunity> jobOpportunities;
 		private String name;
 		
 		public SalesManager() {}
 		
 		public SalesManager(List <JobOpportunity> jobOpportunities, String name) {
 			super();
-			this.jobOpportunities = jobOpportunities;
+			//this.jobOpportunities = jobOpportunities;
 			this.name = name;
 			
 		}
 		
 		
-		public List<JobOpportunity> getJobopportunities() {
-			return jobOpportunities;
-		}
+//		public List<JobOpportunity> getJobopportunities() {
+//			return jobOpportunities;
+//		}
 
-		public void setJobopportunities(List<JobOpportunity> jobOpportunities) {
-			this.jobOpportunities = jobOpportunities;
-		}
+//		public void setJobopportunities(List<JobOpportunity> jobOpportunities) {
+//			this.jobOpportunities = jobOpportunities;
+//		}
 
 		public String getName() {
 			return name;
@@ -62,7 +62,7 @@ public class SalesManager extends User {
 
 		@Override
 		public String toString() {
-			return "Sales Manager [id=" + id + ", Name=" + name + ", Jobopportunities=" + jobOpportunities + "]";
+			return "Sales Manager [id=" + id + ", Name=" + name + ", Jobopportunities=" + "]";
 		}
 		
 	}

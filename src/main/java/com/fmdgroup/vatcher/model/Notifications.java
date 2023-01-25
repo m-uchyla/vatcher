@@ -15,8 +15,8 @@ import javax.persistence.Id;
 		@GeneratedValue(strategy = GenerationType.AUTO)
 		private Long id;
 		private String message;
-		private User sender;
-		private User receiver;
+//		private User sender;
+//		private User receiver;
 		private Date timestamp;
 		private boolean read;
 		
@@ -24,11 +24,11 @@ import javax.persistence.Id;
 		public Notifications() {
 		}
 		
-		public Notifications(String message, User sender, User receiver, Date timestamp, boolean read) {
+		public Notifications(String message, SingleUser sender, SingleUser receiver, Date timestamp, boolean read) {
 			super();
 			this.message = message;
-			this.sender = sender;
-			this.receiver = receiver;
+//			this.sender = sender;
+//			this.receiver = receiver;
 			this.timestamp = timestamp;
 			this.read = read;
 		}
@@ -42,21 +42,21 @@ import javax.persistence.Id;
 			this.message = message;
 		}
 
-		public User getSender() {
-			return sender;
-		}
-
-		public void setSender(User sender) {
-			this.sender = sender;
-		}
-
-		public User getReceiver() {
-			return receiver;
-		}
-
-		public void setReceiver(User receiver) {
-			this.receiver = receiver;
-		}
+//		public User getSender() {
+//			return sender;
+//		}
+//
+//		public void setSender(User sender) {
+//			this.sender = sender;
+//		}
+//
+//		public User getReceiver() {
+//			return receiver;
+//		}
+//
+//		public void setReceiver(User receiver) {
+//			this.receiver = receiver;
+//		}
 
 		public Date getTimestamp() {
 			return timestamp;
@@ -74,10 +74,10 @@ import javax.persistence.Id;
 			this.read = read;
 		}
 		
-		@Override
-		public int hashCode() {
-			return Objects.hash(message, sender, receiver);
-		}
+//		@Override
+//		public int hashCode() {
+//			return Objects.hash(message, sender, receiver);
+//		}
 		
 		@Override
 		public boolean equals(Object obj) {
@@ -93,7 +93,7 @@ import javax.persistence.Id;
 
 		@Override
 		public String toString() {
-			return "Notifications [message=" + message + ", sender=" + sender + ", receiver=" + receiver
+			return "Notifications [message=" + message + ", sender=" +  ", receiver="
 					+ ", timestamp=" + timestamp + ", read=" + read + "]";
 		}
 		

@@ -2,6 +2,7 @@ package com.fmdgroup.vatcher.model;
 
 import java.util.Set;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,19 +15,21 @@ public class Trainee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@ElementCollection
 	private Set<String> qualifications;
+	@ElementCollection
 	private Set<String> jobsPreferences;
 	
-	@OneToOne(mappedBy = "users")
-	private User user;
+//	@OneToOne(mappedBy = "users")
+//	private User user;
 	
 	public Trainee() {}
 	
-	public Trainee(Set<String> qualifications, Set<String> jobsPreferences, User user) {
+	public Trainee(Set<String> qualifications, Set<String> jobsPreferences, SingleUser user) {
 		super();
 		this.qualifications = qualifications;
 		this.jobsPreferences = jobsPreferences;
-		this.user = user;
+		//this.user = user;
 	}
 
 	public Long getId() {
@@ -53,18 +56,18 @@ public class Trainee {
 		this.jobsPreferences = jobsPreferences;
 	}
 
-	public User getUser() {
-		return user;
-	}
+//	public User getUser() {
+//		return user;
+//	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
 
 	@Override
 	public String toString() {
 		return "Trainee [id=" + id + ", qualifications=" + qualifications + ", jobsPreferences=" + jobsPreferences
-				+ ", user=" + user + "]";
+				+ ", user="  + "]";
 	}
 	
 }
