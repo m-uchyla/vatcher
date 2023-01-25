@@ -23,9 +23,8 @@ import javax.persistence.Id;
 		public Notifications() {
 		}
 		
-		public Notifications(Long id, String message, User sender, User receiver, Date timestamp, boolean read) {
+		public Notifications(String message, User sender, User receiver, Date timestamp, boolean read) {
 			super();
-			this.id = id;
 			this.message = message;
 			this.sender = sender;
 			this.receiver = receiver;
@@ -33,13 +32,6 @@ import javax.persistence.Id;
 			this.read = read;
 		}
 
-		public Long getId() {
-			return id;
-		}
-
-		public void setId(Long id) {
-			this.id = id;
-		}
 
 		public String getMessage() {
 			return message;
