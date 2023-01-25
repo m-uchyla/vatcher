@@ -1,6 +1,7 @@
 package com.fmdgroup.vatcher.model;
 
 	import java.sql.Date;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -73,5 +74,27 @@ import javax.persistence.Id;
 			this.read = read;
 		}
 		
+		@Override
+		public int hashCode() {
+			return Objects.hash(message, sender, receiver);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Notifications other = (Notifications) obj;
+			return Objects.equals(id, other.id);
+		}
+
+		@Override
+		public String toString() {
+			return "Notifications [message=" + message + ", sender=" + sender + ", receiver=" + receiver
+					+ ", timestamp=" + timestamp + ", read=" + read + "]";
+		}
 		
 	}
