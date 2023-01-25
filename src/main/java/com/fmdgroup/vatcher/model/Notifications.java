@@ -78,7 +78,7 @@ import javax.persistence.Id;
 		public int hashCode() {
 			return Objects.hash(message, sender, receiver);
 		}
-
+		
 		@Override
 		public boolean equals(Object obj) {
 			if (this == obj)
