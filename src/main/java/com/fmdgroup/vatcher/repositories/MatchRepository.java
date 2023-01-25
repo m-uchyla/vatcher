@@ -6,10 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 import com.fmdgroup.vatcher.model.Match;
 
 
-public interface MatchRepository {
+public interface MatchRepository extends CrudRepository<Match, Long>{
 	
 
-	public interface BookRepository extends CrudRepository<Match, Long> {
 
-	}
 }
