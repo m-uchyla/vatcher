@@ -1,17 +1,11 @@
 package com.fmdgroup.vatcher.model;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class SalesManager extends User {
@@ -20,12 +14,12 @@ public class SalesManager extends User {
 		@Id
 		@GeneratedValue(strategy = GenerationType.AUTO)
 		private Long id;
-		private List<JobOpportunities> jobOpportunities;
+		private List<JobOpportunity> jobOpportunities;
 		private String name;
 		
 		public SalesManager() {}
 		
-		public SalesManager(List <JobOpportunities> jobOpportunities, String name) {
+		public SalesManager(List <JobOpportunity> jobOpportunities, String name) {
 			super();
 			this.jobOpportunities = jobOpportunities;
 			this.name = name;
@@ -33,11 +27,11 @@ public class SalesManager extends User {
 		}
 		
 		
-		public List<JobOpportunities> getJobopportunities() {
+		public List<JobOpportunity> getJobopportunities() {
 			return jobOpportunities;
 		}
 
-		public void setJobopportunities(List<JobOpportunities> jobOpportunities) {
+		public void setJobopportunities(List<JobOpportunity> jobOpportunities) {
 			this.jobOpportunities = jobOpportunities;
 		}
 
