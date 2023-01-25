@@ -38,6 +38,11 @@ public class Match {
 		this.matchedOn = matchedOn;
 	}
 
+	
+	public Long getId() {
+		return id;
+	}
+
 	public Trainee getTrainee() {
 		return trainee;
 	}
