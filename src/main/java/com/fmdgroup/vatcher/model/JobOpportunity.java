@@ -1,13 +1,11 @@
 package com.fmdgroup.vatcher.model;
 import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name="Job_Opportunities")
@@ -114,17 +112,4 @@ public class JobOpportunity {
 		this.matches = matches;
 	};
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
