@@ -7,8 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import javax.persistence.JoinTable;
 
 @Entity
 @Table(name="trainees")
@@ -21,10 +27,15 @@ public class Trainee {
 	private Set<String> qualifications;
 	@ElementCollection
 	private Set<String> jobsPreferences;
-	
-	@OneToOne(mappedBy = "trainee")
+	@OneToOne
 	private SingleUser user;
-	
+	@ManyToMany
+	@JoinTable(name = "trainees_jobOpportunities", joinColumns = @JoinColumn(name = "Job_Opportunities_id"),
+	inverseJoinColumns = @JoinColumn(name = "trainees_id"))
+	private Set<JobOpportunity> jobOpportunities;
+	@ManyToOne
+	private Match match;
+
 	public Trainee() {}
 	
 	public Trainee(Set<String> qualifications, Set<String> jobsPreferences, SingleUser user) {
@@ -32,6 +43,22 @@ public class Trainee {
 		this.qualifications = qualifications;
 		this.jobsPreferences = jobsPreferences;
 		this.user = user;
+	}
+	
+	public Set<JobOpportunity> getJobOpportunities() {
+		return jobOpportunities;
+	}
+
+	public void setJobOpportunities(Set<JobOpportunity> jobOpportunities) {
+		this.jobOpportunities = jobOpportunities;
+	}
+
+	public Match getMatch() {
+		return match;
+	}
+
+	public void setMatch(Match match) {
+		this.match = match;
 	}
 
 	public Long getId() {
