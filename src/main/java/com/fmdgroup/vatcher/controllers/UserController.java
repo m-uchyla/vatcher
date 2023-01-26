@@ -28,7 +28,7 @@ public class UserController {
 		super();
 		this.userRepository = userRepository;
 	}
-
+// /users path to the list of users
 	@RequestMapping("/users")
 	public String getUsers(Model model) {
 		model.addAttribute("users", userRepository.findAll());
@@ -47,6 +47,7 @@ public class UserController {
 		
 		userRepository.save( user);
 		return "redirect:/users";
+		// redirect:/users -> after new user is created it redirects to path/users
 
 	}
 
