@@ -2,12 +2,17 @@ package com.fmdgroup.vatcher.model;
 
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="single_users")
 public class SingleUser {
 
 @Id
@@ -16,6 +21,10 @@ private Long id;
 private String name;
 private String email;
 private String password;
+
+@OneToOne(cascade = CascadeType.ALL)
+@JoinColumn(name = "trainee_id", referencedColumnName = "id", nullable = true)
+private Trainee trainee;
 
 public SingleUser() {}
 

@@ -8,8 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="trainees")
 public class Trainee {
 	
 	@Id
@@ -20,8 +22,8 @@ public class Trainee {
 	@ElementCollection
 	private Set<String> jobsPreferences;
 	
-//	@OneToOne(mappedBy = "users")
-//	private User user;
+	@OneToOne(mappedBy = "trainee")
+	private SingleUser user;
 	
 	public Trainee() {}
 	
@@ -29,7 +31,7 @@ public class Trainee {
 		super();
 		this.qualifications = qualifications;
 		this.jobsPreferences = jobsPreferences;
-		//this.user = user;
+		this.user = user;
 	}
 
 	public Long getId() {
@@ -56,18 +58,18 @@ public class Trainee {
 		this.jobsPreferences = jobsPreferences;
 	}
 
-//	public User getUser() {
-//		return user;
-//	}
+	public SingleUser getUser() {
+		return user;
+	}
 
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
+	public void setUser(SingleUser user) {
+		this.user = user;
+	}
 
 	@Override
 	public String toString() {
 		return "Trainee [id=" + id + ", qualifications=" + qualifications + ", jobsPreferences=" + jobsPreferences
-				+ ", user="  + "]";
+				+ ", user=" + user + "]";
 	}
 	
 }
