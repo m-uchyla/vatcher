@@ -16,7 +16,7 @@ public class MatchController {
 	}
 	
 	@RequestMapping("/match")
-	public String getUsers(Model model) {
+	public String getMatch(Model model) {
 		model.addAttribute("match", matchRepository.findAll());
 		return "match";
 	}

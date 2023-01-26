@@ -16,7 +16,7 @@ public class JobOpportunityController {
 	}
 	
 	@RequestMapping("/jobOpportunity")
-	public String getUsers(Model model) {
+	public String getJobOpportunities(Model model) {
 		model.addAttribute("jobOpportunity", jobOpportunityRepository.findAll());
 		return "jobOpportunity";
 	}
