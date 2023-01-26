@@ -47,11 +47,11 @@ public class JobOpportunity {
 	}
 
 	public Long getJob_id() {
-		return job_id;
+		return id;
 	}
 
 	public void setJob_id(Long job_id) {
-		this.job_id = job_id;
+		this.id = job_id;
 	}
 
 	public String getJobTitle() {
