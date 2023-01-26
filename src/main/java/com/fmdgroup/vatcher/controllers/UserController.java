@@ -46,7 +46,7 @@ public class UserController {
 	public String createNewUser(ModelMap model, @ModelAttribute SingleUser user) {
 		
 		userRepository.save( user);
-		return "redirect:/singleUser";
+		return "redirect:/users";
 
 	}
 
