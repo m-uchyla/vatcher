@@ -1,8 +1,12 @@
 package com.fmdgroup.vatcher.controllers;
 
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -37,15 +41,33 @@ public class UserControllerTest {
 	@Test
 	public void test_createNewUser() throws Exception{
 		SingleUser user = new SingleUser("Filip","eee@ss.pl","xxx");
+		// mockMvc is model view controller - it allows us to pretend requests to the server.
 		mockMvc.perform(post("/addUser").param("name","Filip")
-				.param("emile", "eee@ss.pl" )
+				.param("email", "eee@ss.pl" )
 				.param("password","xxx"))
-				.andExpect(status().isOk())
-				.andExpect(view().name("singleUser"));
+				.andExpect(status().is(302))
+				.andExpect(view().name("redirect:/users"));
 		
 		verify(repository, times(1)).save(user);
 		
 	}
+	
+	@Test 
+	public void test_getUsers() throws Exception {
+		List<SingleUser> usersList = new ArrayList<>();
+		usersList.add(new SingleUser("Adam","adam@adam.pl","12345"));
+		when(repository.findAll()).thenReturn(usersList);
+		
+		// "/users" below is the path from @RequestMapping for getUsers method.
+		
+		mockMvc.perform(get("/users"))
+		.andExpect(status().isOk())
+		.andExpect(model().attribute("users", usersList ))
+		.andExpect(view().name("singleUser"));
+		
+	}
+	
+	
 	
 	
 	
