@@ -22,10 +22,6 @@ private String name;
 private String email;
 private String password;
 
-@OneToOne(cascade = CascadeType.ALL)
-@JoinColumn(name = "trainee_id", referencedColumnName = "id", nullable = true)
-private Trainee trainee;
-
 public SingleUser() {}
 
 public SingleUser(String name, String email, String password) {
