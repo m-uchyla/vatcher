@@ -16,7 +16,7 @@ public class SalesManagerController {
 	}
 	
 	@RequestMapping("/salesManager")
-	public String getUsers(Model model) {
+	public String getSalesManagers(Model model) {
 		model.addAttribute("salesManager", salesManagerRepository.findAll());
 		return "salesManager";
 	}

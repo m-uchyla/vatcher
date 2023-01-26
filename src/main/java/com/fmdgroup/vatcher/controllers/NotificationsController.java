@@ -16,7 +16,7 @@ public class NotificationsController {
 	}
 	
 	@RequestMapping("/notifications")
-	public String getUsers(Model model) {
+	public String getNotifications(Model model) {
 		model.addAttribute("notifications", notificationsRepository.findAll());
 		return "notifications";
 	}

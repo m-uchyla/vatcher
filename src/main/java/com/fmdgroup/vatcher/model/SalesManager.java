@@ -2,38 +2,47 @@ package com.fmdgroup.vatcher.model;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 @Entity
-public class SalesManager extends SingleUser {
+public class SalesManager {
 		
 		
 		@Id
 		@GeneratedValue(strategy = GenerationType.AUTO)
 		private Long id;
-		//private List<JobOpportunity> jobOpportunities;
+		
+		@ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}) 
+		private List<JobOpportunity> jobOpportunities;
+
+		@OneToOne
+	    private SingleUser user;		//mapped by was deleted and it works IDK why xD
+		
 		private String name;
 		
 		public SalesManager() {}
 		
 		public SalesManager(List <JobOpportunity> jobOpportunities, String name) {
 			super();
-			//this.jobOpportunities = jobOpportunities;
+			this.jobOpportunities = jobOpportunities;
 			this.name = name;
 			
 		}
 		
 		
-//		public List<JobOpportunity> getJobopportunities() {
-//			return jobOpportunities;
-//		}
+		public List<JobOpportunity> getJobopportunities() {
+			return jobOpportunities;
+		}
 
-//		public void setJobopportunities(List<JobOpportunity> jobOpportunities) {
-//			this.jobOpportunities = jobOpportunities;
-//		}
+		public void setJobopportunities(List<JobOpportunity> jobOpportunities) {
+			this.jobOpportunities = jobOpportunities;
+		}
 
 		public String getName() {
 			return name;
@@ -41,6 +50,10 @@ public class SalesManager extends SingleUser {
 
 		public void setName(String name) {
 			this.name = name;
+		}
+		
+		public void setUser(SingleUser user) {		
+			this.user = user;
 		}
 
 		@Override
