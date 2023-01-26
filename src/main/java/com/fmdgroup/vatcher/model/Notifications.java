@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 	@Entity
 	public class Notifications {
@@ -15,8 +16,10 @@ import javax.persistence.Id;
 		@GeneratedValue(strategy = GenerationType.AUTO)
 		private Long id;
 		private String message;
-//		private User sender;
-//		private User receiver;
+		@ManyToOne
+		private SingleUser sender;
+		@ManyToOne
+		private SingleUser receiver;
 		private Date timestamp;
 		private boolean read;
 		
@@ -27,8 +30,8 @@ import javax.persistence.Id;
 		public Notifications(String message, SingleUser sender, SingleUser receiver, Date timestamp, boolean read) {
 			super();
 			this.message = message;
-//			this.sender = sender;
-//			this.receiver = receiver;
+			this.sender = sender;
+			this.receiver = receiver;
 			this.timestamp = timestamp;
 			this.read = read;
 		}
@@ -42,21 +45,21 @@ import javax.persistence.Id;
 			this.message = message;
 		}
 
-//		public User getSender() {
-//			return sender;
-//		}
-//
-//		public void setSender(User sender) {
-//			this.sender = sender;
-//		}
-//
-//		public User getReceiver() {
-//			return receiver;
-//		}
-//
-//		public void setReceiver(User receiver) {
-//			this.receiver = receiver;
-//		}
+		public SingleUser getSender() {
+			return sender;
+		}
+
+		public void setSender(SingleUser sender) {
+			this.sender = sender;
+		}
+
+		public SingleUser getReceiver() {
+			return receiver;
+		}
+
+		public void setReceiver(SingleUser receiver) {
+			this.receiver = receiver;
+		}
 
 		public Date getTimestamp() {
 			return timestamp;
@@ -74,10 +77,10 @@ import javax.persistence.Id;
 			this.read = read;
 		}
 		
-//		@Override
-//		public int hashCode() {
-//			return Objects.hash(message, sender, receiver);
-//		}
+		@Override
+		public int hashCode() {
+			return Objects.hash(message, sender, receiver);
+		}
 		
 		@Override
 		public boolean equals(Object obj) {
