@@ -7,29 +7,38 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Match")
+@Table(name = "Match")
+@NamedQuery(name = "getAllMatches", query = "SELECT j FROM Match j")
 public class Match {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column
-	private Long id;
-//	@Column
-//	private Trainee trainee;
-//	@Column
-//	private JobOpportunity jobopportunity;
-	@Column
-	private String status;
-	@Column
-	private Date matchedOn;
-	
 
-	
-	public Match() {}
-	
+	private Long id;
+	@ManyToOne
+	@JoinTable(name = "Job_Opportunities", joinColumns = @JoinColumn(name = "id"))
+
+	private Trainee trainee;
+
+	@ManyToOne
+	@JoinTable(name = "Trainee", joinColumns = @JoinColumn(name = "id"))
+
+	private JobOpportunity jobopportunity;
+
+	private String status;
+
+	private Date matchedOn;
+
+	public Match() {
+	}
+
 	public Match(Trainee trainee, JobOpportunity jobopportunity, String status, Date matchedOn) {
 		super();
 //		this.trainee = trainee;
@@ -38,7 +47,6 @@ public class Match {
 		this.matchedOn = matchedOn;
 	}
 
-	
 	public Long getId() {
 		return id;
 	}
@@ -81,10 +89,5 @@ public class Match {
 				+ ", getMatchedOn()=" + getMatchedOn() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
 				+ ", toString()=" + super.toString() + "]";
 	}
-	
-	
-	
-	
-	
-	
+
 }
