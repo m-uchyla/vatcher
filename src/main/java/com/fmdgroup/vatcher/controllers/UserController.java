@@ -33,6 +33,7 @@ public class UserController {
 	public String getUsers(Model model) {
 		model.addAttribute("users", userRepository.findAll());
 		return "singleUser";
+		// singleUser is a view, it is name of html file that makes view.
 	}
 //GetMapping allows user to open a website with places with input a data. 
 	@RequestMapping(method = RequestMethod.GET, value = "/addUser")
