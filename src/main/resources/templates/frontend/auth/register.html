@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Vatcher - register</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="stylesheet" href="../css/style.css">
+	</head>
+	<body>
+		<div class="singleCard">
+			<form class="card login">
+				 <h1>REGISTER</h1>
+				 <div class="input">
+					 <p>Name:</p>
+					 <input type="text" name="name">
+				 </div>
+				 <div class="input">
+					 <p>Email:</p>
+					 <input type="email" name="email">
+				 </div>
+				 <div class="input">
+					 <p>Password:</p>
+					 <input type="password" name="password" id="password">
+				 </div>
+				 <div class="input">
+					 <p>Confirm password:</p>
+					 <input type="password" name="passwordConfirmation" id="confirm_password">
+				 </div>
+				 <div class="center">
+				 	<input class="button" type="submit" value="Create account">
+				 </div>
+				 <div class="register">
+				 	<a href="">Login</a>
+				 </div>
+			</form>
+			
+		</div>
+	</body>
+	<script>
+	var password = document.getElementById("password")
+	  , confirm_password = document.getElementById("confirm_password");
+
+	function validatePassword(){
+	  if(password.value != confirm_password.value) {
+	    confirm_password.setCustomValidity("Passwords Don't Match");
+	  } else {
+	    confirm_password.setCustomValidity('');
+	  }
+	}
+
+	password.onchange = validatePassword;
+	confirm_password.onkeyup = validatePassword;
+	</script>
+</html>

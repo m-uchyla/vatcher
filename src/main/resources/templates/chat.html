@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Chat</title>
+  </head>
+  <body>
+    <h1>Chat Page</h1>
+    <form th:action="@{/chat/opportunity}" method="post">
+      <input type="hidden" name="opportunityID" th:value="${opportunityID}" />
+      <input type="text" name="sender" placeholder="Your name" required />
+      <input type="text" name="content" placeholder="Type your message" required />
+      <button type="submit">Send</button>
+    </form>
+    <hr />
+    <div th:each="message : ${messages}">
+      <p><strong th:text="${message.sender}">Sender</strong>: <span th:text="${message.content}">Content</span></p>
+    </div>
+  </body>
+</html>

@@ -1,11 +1,14 @@
 package com.fmdgroup.vatcher.controllers;
 
+
 import static org.mockito.ArgumentMatchers.any;
+
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.util.HashSet;
@@ -13,6 +16,12 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+
+
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,16 +29,21 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+
+
 import com.fmdgroup.vatcher.VatcherApplication;
 import com.fmdgroup.vatcher.model.SingleUser;
 import com.fmdgroup.vatcher.model.Trainee;
 import com.fmdgroup.vatcher.repositories.TraineeRepository;
 import com.fmdgroup.vatcher.repositories.UserRepository;
+
 import com.fmdgroup.vatcher.services.TraineeService;
 
 @EnableWebMvc
@@ -89,4 +103,6 @@ import com.fmdgroup.vatcher.services.TraineeService;
 
 		
 		}
+
+
 
