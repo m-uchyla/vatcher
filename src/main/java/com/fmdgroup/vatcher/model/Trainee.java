@@ -1,5 +1,6 @@
 package com.fmdgroup.vatcher.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.ElementCollection;
@@ -24,9 +25,9 @@ public class Trainee {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@ElementCollection
-	private Set<String> qualifications;
+	private Set<String> qualifications = new HashSet();
 	@ElementCollection
-	private Set<String> jobsPreferences;
+	private Set<String> jobsPreferences = new HashSet();
 	@OneToOne
 	private SingleUser user;
 	@ManyToMany
