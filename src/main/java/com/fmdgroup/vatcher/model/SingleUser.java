@@ -60,6 +60,8 @@ public int hashCode() {
 	return Objects.hash(email, name, password);
 }
 
+
+
 @Override
 public boolean equals(Object obj) {
 	if (this == obj)
@@ -76,6 +78,16 @@ public boolean equals(Object obj) {
 @Override
 public String toString() {
 	return "User [name=" + name + ", email=" + email + ", password=" + password + "]";
+}
+
+public Long getId() {
+	// TODO Auto-generated method stub
+	return id;
+}
+
+public void setId(long id) {
+	this.id = id;
+	
 }
 
 
