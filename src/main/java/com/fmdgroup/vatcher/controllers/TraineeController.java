@@ -1,5 +1,6 @@
 package com.fmdgroup.vatcher.controllers;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -57,14 +58,20 @@ public class TraineeController {
 		model.addAttribute("trainees", traineeRepository.findAll());
 		return "singleUser";
 	}
+	@RequestMapping(method = RequestMethod.POST, value = "/addJobPreferences/{id}")
+	public String updatePreferences(ModelMap model ,@RequestParam String jobPreference, @PathVariable Long id) throws Exception  {
 
+		service.updateJobPreferences(jobPreference, id);
+		populateModel(model);
+		return "singleUser";
+
+	}
 	@RequestMapping(method = RequestMethod.POST, value = "/addQualification/{id}")
 	
-	public String updateQualification(ModelMap model ,@RequestParam String qualification, @PathVariable Long id)  {
-		Set<String> traineeQualifications = service.traineeQualification();
-		traineeQualifications.add(qualification);
-		model.addAttribute(qualification, traineeQualifications);
-		
+	public String updateQualification(ModelMap model ,@RequestParam String qualification, @PathVariable Long id) throws Exception  {
+
+		service.updateQualification(qualification, id);
+		populateModel(model);
 		return "singleUser";
 
 		
