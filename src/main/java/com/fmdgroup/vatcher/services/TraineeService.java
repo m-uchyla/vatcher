@@ -35,7 +35,7 @@ public class TraineeService implements ITraineeService {
 		Trainee trainee = traineeRepo.getById(id);
 		Set<String> traineeQualification = trainee.getQualifications();
 		traineeQualification.add(qualification);
-		traineeRepo.save(trainee);
+		traineeRepo.save(null);
 
 	}
 
