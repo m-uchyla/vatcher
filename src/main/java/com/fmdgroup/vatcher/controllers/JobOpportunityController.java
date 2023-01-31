@@ -3,21 +3,24 @@ package com.fmdgroup.vatcher.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fmdgroup.vatcher.model.JobOpportunity;
 import com.fmdgroup.vatcher.repositories.JobOpportunityRepository;
+import com.fmdgroup.vatcher.services.JobOpportunityService;
 
 @Controller
 public class JobOpportunityController {
 	private final JobOpportunityRepository jobOpportunityRepository; //create an instance of JobOpportunityRepository 
-																	//which is used to access the data stored in the 
+	private final JobOpportunityService	service;																//which is used to access the data stored in the 
 																	//job opportunity repository
 
-	public JobOpportunityController(JobOpportunityRepository jobOpportunityRepository) { //
+	public JobOpportunityController(JobOpportunityRepository jobOpportunityRepository, JobOpportunityService service) { //
 		super();
 		this.jobOpportunityRepository = jobOpportunityRepository;
+		this.service = service;
 	}
 	
 	@RequestMapping("/jobOpportunity")	//pobieranie //method is responsible for handling requests 
@@ -35,7 +38,7 @@ public class JobOpportunityController {
 	// only the active jobopportunites:
 
 	@RequestMapping("/activeJobOpportunities")							//to handle HTTP POST requests
-		public String getActiveJobOpportuniteis(Model model) {
+		public String getActiveJobOpportunities(Model model) {
 		model.addAttribute("jobOpportunity", jobOpportunityRepository.findByActiveTrue());
 		return "addUser"; 
 
@@ -56,5 +59,15 @@ public class JobOpportunityController {
 	//The @ModelAttribute is used to associate the 
 	//object with the model so that the data from the form can be used in the controller method.
 
+	@RequestMapping("/jobOpportunity/{id}")
+	public String findJobOpportunityByID(@PathVariable("id") Long ID, Model model) {
+		try {
+			model.addAttribute("jobOpportunity", service.findJobOpportunityByID(ID));
+		} catch(Exception e) {
+			model.addAttribute("jobOpportunity", null);
+		}
+		return "addUser";
+		
+	}
 }
 
