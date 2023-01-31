@@ -34,7 +34,7 @@ import com.fmdgroup.vatcher.repositories.UserRepository;
 public class UserControllerTest {
 	@MockBean 
 	private UserRepository repository ;
-	
+	 
 	@Autowired
 	private MockMvc mockMvc;
 
@@ -56,7 +56,7 @@ public class UserControllerTest {
 	public void test_getUsers() throws Exception {
 		List<SingleUser> usersList = new ArrayList<>();
 		usersList.add(new SingleUser("Adam","adam@adam.pl","12345"));
-		when(repository.findAll()).thenReturn(usersList);
+		when(repository.findAll()).thenReturn(usersList); 
 		
 		// "/users" below is the path from @RequestMapping for getUsers method.
 		

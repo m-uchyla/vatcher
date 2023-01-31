@@ -26,10 +26,13 @@ public class JobOpportunity {
 	private String duration;
 	private String description;
 	private HashSet<String> skills;
+	private boolean active;				//for mapping only active jobopportunities in the controller
+
 	@ManyToMany
 	private Set<Trainee> applicants;
 	@OneToMany
 	private Set<Match> matches;
+ 
 	
 	public JobOpportunity() {}
 
@@ -42,10 +45,23 @@ public class JobOpportunity {
 		this.duration = duration;
 		this.description = description;
         this.skills = new HashSet<>(skills);
+        this.active	= true;		//kazda nowo dodana bedzie aktywna z automatu
 		this.applicants = applicants;
 		this.matches = matches;
+
+	}	
+	
+	
+
+	public boolean isActive() {			//change for active jobopportunities in controller
+		return active;
 	}
 
+	public void setActive(boolean active) {	//change for active jobopportunities in controller
+		this.active = active;
+	}
+
+	
 	public Long getJob_id() {
 		return id;
 	}
