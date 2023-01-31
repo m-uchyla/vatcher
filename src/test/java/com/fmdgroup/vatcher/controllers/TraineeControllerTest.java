@@ -27,6 +27,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -64,10 +65,10 @@ import com.fmdgroup.vatcher.services.TraineeService;
 		@Test
 		public void test_updateQualification() throws Exception{
 			ArgumentCaptor<Trainee> mockTraineeCaptor = null;
-			// Create a new qualifications set
+		
 	        Set<String> newQualifications = new HashSet<>();
 	        newQualifications.add("yyy");
-	        //newQualifications.add("zzz");
+	
 	        
 
 	    	Trainee trainee = new Trainee();
@@ -82,8 +83,9 @@ import com.fmdgroup.vatcher.services.TraineeService;
 	     
 	    	verify(service, times(1)).traineeQualification();
 		}
+
 		
-//		@Test
+		//@Test
 //		public void test_SaveTrainee() throws Exception {
 //			
 //			Set<String> jobPreferences = new HashSet<>();
@@ -91,18 +93,37 @@ import com.fmdgroup.vatcher.services.TraineeService;
 //		    SingleUser user = new SingleUser();
 //		    user.setId(1L);
 //		    Trainee trainee = new Trainee(jobQualifications, jobPreferences, user);
-//		
+//		    
+//		    //when(service.addTrainee(any(Trainee.class))).thenReturn("singleUser");
 //
 //		    mockMvc.perform(MockMvcRequestBuilders.post("/savetrainees")
 //	                .contentType(MediaType.APPLICATION_JSON)
 //	                .content(new ObjectMapper().writeValueAsString(trainee)))
-//            //.andExpect(MockMvcResultMatchers.status().isOk())
-//            .andExpect(MockMvcResultMatchers.content().string("addUser"));
+//            .andExpect(MockMvcResultMatchers.status().is(404))
+//            .andExpect(view().name("singleUser"));
 //		    
 //		}
 
+		@Test
+		public void test_AddTrainee() throws Exception  {
+			Set<String> qualifications = new HashSet<>();
+			Set<String> jobsPreferences = new HashSet<>();
+			SingleUser user = new SingleUser("jax","xx","zxz");
+		    Trainee trainee = new Trainee(qualifications,jobsPreferences,user);
+		    //trainee.setId(1L);
+
+		    mockMvc.perform(post("/addtrainee")
+		    		.flashAttr("trainee", trainee))
+			.andExpect(status().isOk())
+			.andExpect(view().name("singleUser"));
+	
+	verify(service, times(1)).addTrainee(trainee);
+		}
+//
+
 		
 		}
+
 
 
 
