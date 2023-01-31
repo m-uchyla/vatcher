@@ -15,21 +15,24 @@ public class TraineeService implements ITraineeService {
 
 	private TraineeRepository traineeRepo;
 
-	@Override
-	public Set<String> traineeQualification() {
-
-		return null;
-	}
+	
 
 	@Override
 	public Trainee findTraineeById(Long id) throws Exception {
-		Optional<Trainee> optTrainee = traineeRepo.findById(id);
-		return optTrainee.orElseThrow(() -> new Exception());
+		Optional<Trainee> trainee = traineeRepo.findById(id);
+		return trainee.orElseThrow(()-> new Exception());
 	}
-
+	@Override
+	public void updateJobPreferences(String preference, Long id) throws Exception {
+		Trainee trainee = traineeRepo.getById(id);
+		Set<String> traineeJobPreferences = trainee.getJobsPreferences();
+		traineeJobPreferences.add(preference);
+		traineeRepo.save(trainee);
+	}
+	
 	@Override
 	public void updateQualification(String qualification, Long id) throws Exception {
-		Trainee trainee = findTraineeById(id);
+		Trainee trainee = traineeRepo.getById(id);
 		Set<String> traineeQualification = trainee.getQualifications();
 		traineeQualification.add(qualification);
 		traineeRepo.save(trainee);
@@ -44,4 +47,8 @@ public class TraineeService implements ITraineeService {
 	public List<Trainee> findAllTrainee() {
 		return traineeRepo.findAll();
 	}
+
+	
+
+	
 }
