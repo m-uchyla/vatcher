@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fmdgroup.vatcher.model.JobOpportunity;
 import com.fmdgroup.vatcher.model.SingleUser;
 import com.fmdgroup.vatcher.model.Trainee;
 import com.fmdgroup.vatcher.repositories.TraineeRepository;
@@ -62,6 +63,18 @@ public class TraineeController {
 
 		
 
+	}
+	
+	// this is for retrieving job offers applied by the trainee user:
+	@RequestMapping("/trainees/{id}/jobOpportunities")							
+	public String getJobOpportunities(@PathVariable Long id, Model model) {
+	  try {
+	    Set<JobOpportunity> jobOpportunities = service.getJobOpportunities(id);
+	    model.addAttribute("jobOpportunities", jobOpportunities);
+	    return "jobOpportunities";
+	  } catch (Exception e) {
+	    return "error";
+	  }
 	}
 	
 

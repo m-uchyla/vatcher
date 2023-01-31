@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
+import com.fmdgroup.vatcher.model.JobOpportunity;
 import com.fmdgroup.vatcher.model.Trainee;
 import com.fmdgroup.vatcher.repositories.TraineeRepository;
 @Service
@@ -16,6 +17,13 @@ private TraineeRepository traineeRepo;
 	public Set<String> traineeQualification() {
 	
 		return null;
+	}
+	
+	// this is for retrieving job offers applied by the trainee user:
+	@Override				
+	public Set<JobOpportunity> getJobOpportunities(Long traineeId) throws Exception {
+	  Trainee trainee = findTraineeById(traineeId);
+	  return trainee.getJobOpportunities();
 	}
 
 	
@@ -34,7 +42,6 @@ private TraineeRepository traineeRepo;
 		traineeRepo.save(trainee);
 		
 	}
-
 
 
 	

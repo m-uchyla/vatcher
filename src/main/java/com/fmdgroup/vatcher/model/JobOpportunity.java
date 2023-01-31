@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -27,6 +28,10 @@ public class JobOpportunity {
 	private String description;
 	private HashSet<String> skills;
 	private boolean active;				//for mapping only active jobopportunities in the controller
+	
+	@ManyToOne
+	private Trainee trainee;		// this is for retrieving job offers applied 
+									// by the trainee user
 
 	@ManyToMany
 	private Set<Trainee> applicants;
