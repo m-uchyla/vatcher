@@ -1,6 +1,5 @@
 package com.fmdgroup.vatcher.controllers;
 
-	import static org.junit.jupiter.api.Assertions.fail;
 	import static org.mockito.Mockito.times;
 	import static org.mockito.Mockito.verify;
 	import static org.mockito.Mockito.when;
@@ -13,9 +12,7 @@ package com.fmdgroup.vatcher.controllers;
 	import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import org.assertj.core.util.Arrays;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 	import org.springframework.beans.factory.annotation.Autowired;
 	import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,12 +22,12 @@ import org.junit.jupiter.api.Test;
 	import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+
 import com.fmdgroup.vatcher.VatcherApplication;
 	import com.fmdgroup.vatcher.model.JobOpportunity;
-import com.fmdgroup.vatcher.model.Match;
-import com.fmdgroup.vatcher.model.Trainee;
+
 import com.fmdgroup.vatcher.repositories.JobOpportunityRepository;
-import com.fmdgroup.vatcher.repositories.UserRepository;
+import com.fmdgroup.vatcher.services.JobOpportunityService;
 
 
 
@@ -41,9 +38,13 @@ import com.fmdgroup.vatcher.repositories.UserRepository;
 		@MockBean 
 		private JobOpportunityRepository repository ;
 		
+		@MockBean
+		private JobOpportunityService service;
+		
 		@Autowired
 		private MockMvc mockMvc;
 		
+		//test for creating job opportunities
 		@Test
 		public void test_createNewJobs() throws Exception{
 			JobOpportunity jobOpportunity = new JobOpportunity("Job1", "Company1", "Location1", "Duration1", "Description1",
@@ -58,6 +59,8 @@ import com.fmdgroup.vatcher.repositories.UserRepository;
 			
 		} 
 		
+		
+		// test for getting all jobs
 		@Test 
 		public void getJobs() throws Exception {
 			List<JobOpportunity> jobOpportunitiesList = new ArrayList<>();
@@ -74,7 +77,7 @@ import com.fmdgroup.vatcher.repositories.UserRepository;
 			
 		}
 		
-
+		//test for finding active Jobs
 		@Test
 		public void getActiveJObs() throws Exception{
 			List<JobOpportunity> activeJobs = new ArrayList<>();
@@ -92,8 +95,26 @@ import com.fmdgroup.vatcher.repositories.UserRepository;
 		            .andExpect(view().name("addUser"));
 						
 		}
+		
+//		@RequestMapping("/jobOpportunity{ID}")
+//		public String findJobOpportunityByID(@PathVariable("id") Long ID, Model model) {
+//			model.addAttribute("jobOpportunity", jobOpportunityRepository.findById(ID));
+//			return "addUser";
 
 		
+		// test for finding specific job by its' ID 
+		@Test
+		public void findJobOpportnityById() throws Exception{
+			JobOpportunity jobOpportunityById = new JobOpportunity("Job1", "Company1", "Location1", "Duration1", "Description1",
+					new HashSet<>(List.of("Skill1", "Skill1.2")), null, null);
+			
+			when(service.findJobOpportunityByID(1L)).thenReturn(jobOpportunityById);
+			
+			mockMvc.perform(get("/jobOpportunity/1")) 	// 1 because I'm testing the jobopportunity ID 1
+				.andExpect(status().isOk())
+				.andExpect(model().attribute("jobOpportunity", jobOpportunityById))
+				.andExpect(view().name("addUser"));
+		}
 		
 		
 		
