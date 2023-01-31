@@ -107,7 +107,7 @@ import com.fmdgroup.vatcher.services.TraineeService;
 		public void test_AddTrainee() throws Exception  {
 			Set<String> qualifications = new HashSet<>();
 			Set<String> jobsPreferences = new HashSet<>();
-			SingleUser user = new SingleUser("jax","xx","zxz");
+			SingleUser user = new SingleUser("jax","xx","zxz","role");
 		    Trainee trainee = new Trainee(qualifications,jobsPreferences,user);
 		    //trainee.setId(1L);
 
