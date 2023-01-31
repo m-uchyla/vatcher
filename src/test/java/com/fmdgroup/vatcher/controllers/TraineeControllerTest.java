@@ -27,6 +27,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -63,46 +64,66 @@ import com.fmdgroup.vatcher.services.TraineeService;
 		
 		@Test
 		public void test_updateQualification() throws Exception{
-			ArgumentCaptor<Trainee> mockTraineeCaptor = null;
-			// Create a new qualifications set
+			
+			//ArgumentCaptor<Trainee> mockTraineeCaptor = null;
 	        Set<String> newQualifications = new HashSet<>();
 	        newQualifications.add("yyy");
-	        //newQualifications.add("zzz");
-	        
-
 	    	Trainee trainee = new Trainee();
 	    	trainee.setQualifications(newQualifications);
+	    	trainee.setId(1L);
 	    	
-	    	when(service.traineeQualification()).thenReturn(newQualifications);
+	    	when(service.findTraineeById(1L)).thenReturn(trainee);
 	    	when(repository.save(any(Trainee.class))).thenReturn(trainee);
 	    	
-	    	mockMvc.perform(post("/addQualification/{id}", 1).param("qualification", "yyy"))
+	    	mockMvc.perform(post("/addQualification/{id}", 1L).param("qualification", "yyy"))
 			.andExpect(status().isOk())
 			.andExpect(view().name("singleUser"));
 	     
-	    	verify(service, times(1)).traineeQualification();
+	    	verify(service, times(1)).updateQualification("yyy", 1L);
+		}
+
+		@Test
+		public void test_updatePreferences() throws Exception{
+			
+			//ArgumentCaptor<Trainee> mockTraineeCaptor = null;
+	        Set<String> newPreferences = new HashSet<>();
+	        newPreferences.add("xxx");
+	    	Trainee trainee = new Trainee();
+	    	trainee.setQualifications(newPreferences);
+	    	trainee.setId(2L);
+	    	
+	    	when(service.findTraineeById(2L)).thenReturn(trainee);
+	    	when(repository.save(any(Trainee.class))).thenReturn(trainee);
+	    	
+	    	mockMvc.perform(post("/addJobPreferences/{id}", 2L).param("jobPreference", "xxx"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("singleUser"));
+	     
+	    	verify(service, times(1)).updateJobPreferences("xxx", 2L);
 		}
 		
-//		@Test
-//		public void test_SaveTrainee() throws Exception {
-//			
-//			Set<String> jobPreferences = new HashSet<>();
-//		    Set<String> jobQualifications = new HashSet<>();
-//		    SingleUser user = new SingleUser();
-//		    user.setId(1L);
-//		    Trainee trainee = new Trainee(jobQualifications, jobPreferences, user);
-//		
+
+		@Test
+		public void test_AddTrainee() throws Exception  {
+			Set<String> qualifications = new HashSet<>();
+			Set<String> jobsPreferences = new HashSet<>();
+			SingleUser user = new SingleUser("jax","xx","zxz","role");
+		    Trainee trainee = new Trainee(qualifications,jobsPreferences,user);
+		    //trainee.setId(1L);
+
+		    mockMvc.perform(post("/addtrainee")
+		    		//flashAttr pozwala przekazać obiekt 
+		    		.flashAttr("trainee", trainee))
+			.andExpect(status().isOk())
+			.andExpect(view().name("singleUser"));
+	
+	verify(service, times(1)).addTrainee(trainee);
+		}
 //
-//		    mockMvc.perform(MockMvcRequestBuilders.post("/savetrainees")
-//	                .contentType(MediaType.APPLICATION_JSON)
-//	                .content(new ObjectMapper().writeValueAsString(trainee)))
-//            //.andExpect(MockMvcResultMatchers.status().isOk())
-//            .andExpect(MockMvcResultMatchers.content().string("addUser"));
-//		    
-//		}
 
 		
 		}
+
 
 
 
