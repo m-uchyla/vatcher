@@ -51,5 +51,8 @@ public class UserController {
 		// redirect:/users -> after new user is created it redirects to path/users
 
 	}
+	
+	@RequestMapping("/admin")
+	public String testAdminRole(){return "admin";}
 
 }

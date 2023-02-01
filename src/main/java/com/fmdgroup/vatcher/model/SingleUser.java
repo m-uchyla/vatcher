@@ -1,37 +1,83 @@
 package com.fmdgroup.vatcher.model;
-
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+
+//import javax.validation.constraints.NotEmpty;
+//import javax.validation.constraints.Size;
+
+
 @Entity
-@Table(name="single_users")
+@Table(name = "single_users")
 public class SingleUser {
 
 @Id
+@Column(name="id")
 @GeneratedValue(strategy=GenerationType.AUTO)
 private Long id;
+//@NotEmpty(message = "Name should not be empty")
+//@Size(min=2, max=50, message="Name length should be between 2 or 100 characters")
+@Column(name="username")
 private String name;
+@Column(name="email")
 private String email;
+@Column(name="password")
 private String password;
+@Column(name="role")
+private String role;
+
+
+
 
 public SingleUser() {}
 
+
 public SingleUser(String name, String email, String password) {
-	super();
+	System.out.println("Constructor/Creating A single user ");
+	Integer hashedPassword = password.hashCode();
+	String hashedPasswordString = hashedPassword.toString();
 	this.name = name;
 	this.email = email;
-	this.password = password;
+	this.password = hashedPasswordString;
+	//this.password=password;
+	
+	
+}
+
+public SingleUser(String name, String email, String password,String role) {
+	System.out.println("Constructor/Creating A single user ");
+	Integer hashedPassword = password.hashCode();
+	String hashedPasswordString = hashedPassword.toString();
+	this.name = name;
+	this.email = email;
+	this.password = hashedPasswordString;
+	//this.password=password;
+	this.role=role;
+	
+}
+
+
+
+
+
+public String getRole() {
+	
+	return role;
+}
+
+public void setRole(String role) {
+	this.role = role;
 }
 
 public String getName() {
+	
 	return name;
 }
 
@@ -48,19 +94,21 @@ public void setEmail(String email) {
 }
 
 public String getPassword() {
-	return password;
+	System.out.println("Single user Class cionstructor");
+	return this.password;
 }
 
 public void setPassword(String password) {
-	this.password = password;
+	Integer hashedPassword = password.hashCode();
+	String hashedPasswordString = hashedPassword.toString();
+	this.password = hashedPasswordString;
+	//this.password = password;
 }
 
 @Override
 public int hashCode() {
 	return Objects.hash(email, name, password);
 }
-
-
 
 @Override
 public boolean equals(Object obj) {
@@ -78,16 +126,6 @@ public boolean equals(Object obj) {
 @Override
 public String toString() {
 	return "User [name=" + name + ", email=" + email + ", password=" + password + "]";
-}
-
-public Long getId() {
-	// TODO Auto-generated method stub
-	return id;
-}
-
-public void setId(long id) {
-	this.id = id;
-	
 }
 
 
