@@ -23,13 +23,11 @@ public class BootsStrapData implements CommandLineRunner {
 		
 		System.out.println("Started in Bootstrap");
 		
-		SingleUser user1 = new SingleUser("Jan", "jan@nowak.com", "admin1");
-		SingleUser user2 = new SingleUser("Ewa", "ewa@nowak.com", "admin2");
-		SingleUser user3 = new SingleUser("Tomek", "tomek@nowak.com", "admin3");
+		SingleUser user1 = new SingleUser("Jan", "jan@nowak.com", "admin1","ROLE_USER");
+		SingleUser user2 = new SingleUser("Ewa", "ewa@nowak.com", "admin2", "ROLE_ADMIN");
 		
 		userRepository.save(user1);
 		userRepository.save(user2);
-		userRepository.save(user3);
 		
 		System.out.println("Number of users: "+userRepository.count());
 	}
