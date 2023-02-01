@@ -25,9 +25,9 @@ public class Trainee {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@ElementCollection
-	private Set<String> qualifications = new HashSet();
+	private Set<String> qualifications = new HashSet<String>();
 	@ElementCollection
-	private Set<String> jobsPreferences = new HashSet();
+	private Set<String> jobsPreferences = new HashSet<String>();
 	@OneToOne
 	private SingleUser user;
 	@ManyToMany

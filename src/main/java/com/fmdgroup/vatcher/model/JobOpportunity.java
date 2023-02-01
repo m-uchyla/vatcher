@@ -49,7 +49,7 @@ public class JobOpportunity {
 		this.location = location;
 		this.duration = duration;
 		this.description = description;
-        this.skills = new HashSet<>(skills);
+        this.skills = new HashSet<>();
         this.active	= true;		//kazda nowo dodana bedzie aktywna z automatu
 		this.applicants = applicants;
 		this.matches = matches;

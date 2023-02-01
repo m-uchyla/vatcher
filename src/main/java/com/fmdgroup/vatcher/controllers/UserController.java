@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -16,11 +17,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fmdgroup.vatcher.model.SingleUser;
 import com.fmdgroup.vatcher.repositories.UserRepository;
+import com.fmdgroup.vatcher.services.RegistrationService;
 
 @Controller
 public class UserController {
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	RegistrationService regService;
 
 	//private final UserRepository userRepository;
 
@@ -45,8 +49,7 @@ public class UserController {
 
 	@PostMapping(value = "/addUser")
 	public String createNewUser(ModelMap model, @ModelAttribute SingleUser user) {
-		
-		userRepository.save( user);
+		regService.register( user);
 		return "redirect:/users";
 		// redirect:/users -> after new user is created it redirects to path/users
 
@@ -54,5 +57,11 @@ public class UserController {
 	
 	@RequestMapping("/admin")
 	public String testAdminRole(){return "admin";}
+	
+	@RequestMapping("/test")
+	public String testAuthenticatedUser(Authentication authentication, Model model){
+		model.addAttribute("username", authentication.getName());
+		return "admin";
+	}
 
 }
