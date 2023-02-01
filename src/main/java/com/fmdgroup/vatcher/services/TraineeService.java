@@ -1,6 +1,9 @@
 package com.fmdgroup.vatcher.services;
 
+
+
 import java.util.HashSet;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -18,6 +21,7 @@ public class TraineeService implements ITraineeService {
 
 private TraineeRepository traineeRepo;
 
+
 private JobOpportunityService jobOpportunityService;
 
 public TraineeService(JobOpportunityService jobOpportunityService) {
@@ -28,8 +32,7 @@ public TraineeService(JobOpportunityService jobOpportunityService) {
 
 	@Override
 	public Set<String> traineeQualification() {
-	
-		return null;
+return null;
 	}
 	
 	// this is for retrieving job offers applied by the trainee user:
@@ -38,6 +41,7 @@ public TraineeService(JobOpportunityService jobOpportunityService) {
 	  Trainee trainee = findTraineeById(traineeId);
 	  return trainee.getJobOpportunities();
 	}
+
 	
 	//this is for retrieving job offers the trainee did NOT apply for:
 	  @Override
@@ -62,32 +66,47 @@ public TraineeService(JobOpportunityService jobOpportunityService) {
 	    }
 	  
 
+
 	@Override
 	public Trainee findTraineeById(Long id) throws Exception {
-		Optional<Trainee> optTrainee = traineeRepo.findById(id);
-		return optTrainee.orElseThrow(()-> new Exception());
+		Optional<Trainee> trainee = traineeRepo.findById(id);
+		return trainee.orElseThrow(()-> new Exception());
 	}
-
+	@Override
+	public void updateJobPreferences(String preference, Long id) throws Exception {
+		Trainee trainee = traineeRepo.getById(id);
+		Set<String> traineeJobPreferences = trainee.getJobsPreferences();
+		traineeJobPreferences.add(preference);
+		traineeRepo.save(trainee);
+	}
+	
 	@Override
 	public void updateQualification(String qualification, Long id) throws Exception {
-		Trainee trainee = findTraineeById(id);
+		Trainee trainee = traineeRepo.getById(id);
 		Set<String> traineeQualification = trainee.getQualifications();
 		traineeQualification.add(qualification);
-		traineeRepo.save(trainee);
-		
+		traineeRepo.save(null);
+
 	}
 
-
-	
-
-
 	@Override
-	public String addTrainee(Trainee trainee) {
+	public String addTrainee(Trainee trainee) throws Exception {
 		traineeRepo.save(trainee);
 		return trainee.getUser().getName();
 	}
+	public List<Trainee> findAllTrainee() {
+		return traineeRepo.findAll();
+	}
+	@Override
+	public void deleteTrainee(Long id) throws Exception {
+		traineeRepo.delete(findTraineeById(id));
+		
+	}
 
 	
+
+
+
 	
 	
 }
