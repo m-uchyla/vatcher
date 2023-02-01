@@ -30,10 +30,10 @@ public TraineeService(JobOpportunityService jobOpportunityService) {
 	
 }
 
-	@Override
-	public Set<String> traineeQualification() {
-return null;
-	}
+//	@Override
+//	public Set<String> traineeQualification(Long id) {
+//			
+//	}
 	
 	// this is for retrieving job offers applied by the trainee user:
 	@Override				
