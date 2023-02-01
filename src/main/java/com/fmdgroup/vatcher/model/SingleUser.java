@@ -63,9 +63,9 @@ public SingleUser(String name, String email, String password,String role) {
 	
 }
 
-
-
-
+public Long getId() {
+	return id;
+}
 
 public String getRole() {
 	
