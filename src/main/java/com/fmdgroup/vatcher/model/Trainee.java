@@ -103,5 +103,10 @@ public class Trainee {
 		return "Trainee [id=" + id + ", qualifications=" + qualifications + ", jobsPreferences=" + jobsPreferences
 				+ ", user=" + user + "]";
 	}
+	//this is for retrieving job offers the trainee did NOT apply for:
+	public Set<String> getAppliedJobTitles() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
