@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fmdgroup.vatcher.model.Chat;
 
@@ -18,21 +19,22 @@ public class ChatController {
 	@GetMapping("/chat")		//maps to the chat page and returns all messages in the chat. adds all messages
 								// to the model and returns the chat view
 	public String chat(Model model) {
+		List<Chat> messages = new ArrayList<>();
 		model.addAttribute("messages", messages);
 		return "chat";
 	}	
 	
-	@GetMapping("/chat/opportunity")	//maps to the chat page with a specific opportunityID and returns only
+	@GetMapping("/chat/{opportunityID}")	//maps to the chat page with a specific opportunityID and returns only
 										//messages related to this opportunity
 										//adds the filtered messages to the model and returns the chat view
-	public String chat(@RequestParam("opportunityID") String opportunityID, Model model) {
+	public String chatWithOpportunityID(@RequestParam("opportunityID") String opportunityID, Model model) {
 		List<Chat> opportunityMessages = new ArrayList<>();
 		for (Chat message : messages) {
 			if (message.getOpportunityID().equals(opportunityID)) {
 				opportunityMessages.add(message);
 			}
 		}
-			model.addAttribute("messages", opportunityMessages);
+//			model.addAttribute("messages", opportunityMessages);
 			model.addAttribute("opportunityID", opportunityID);
 			return "chat";
 	}
@@ -46,19 +48,14 @@ public class ChatController {
 	
 	}
 	
-	@PostMapping("/deleteChat")			//allows to delete a specific message in the chat
+										//allows to delete a specific message in the chat
 										//filters the messages list and removes the matching messages
-	public String deleteMessage(@RequestParam("sender") String sender, @RequestParam("content") String content,
-			@RequestParam("opportunityId") String opportunityID, Model model) {
-		List<Chat> filteredMessages = new ArrayList<>();
-		for (Chat message : messages) {
-			if (message.getOpportunityID().equals(opportunityID) && message.getSender().equals(sender) && message.getContent().equals(content)) {
-				messages.remove(message);
-				break;
-			}
-		}
-		model.addAttribute("messages", filteredMessages);
-		return "chat";
+	@PostMapping("/delete")
+	public String deleteMessage(@RequestParam("id") long id, Model model, RedirectAttributes redirectAttributes) {
+	    // delete message logic here
+
+	    redirectAttributes.addFlashAttribute("successMessage", "Message deleted successfully");
+	    return "redirect:/chat";
 	}
 	
 	//testowa metoda ktora mi pobierze wszystkie czaty 
