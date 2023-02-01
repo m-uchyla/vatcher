@@ -18,5 +18,6 @@ public interface ITraineeService {
 	List<Trainee> findAllTrainee();
   	Set<JobOpportunity> getJobOpportunities(Long traineeId) throws Exception;	// this is for retrieving job offers applied by the trainee user:
 	Set<JobOpportunity> getNotAppliedJobOpportunities(Trainee trainee);			//job offers NOT applied for by trainees
+	//Set<String> traineeQualification(Long id);
 
 }
