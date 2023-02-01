@@ -26,7 +26,8 @@ public class RegistrationService {
 	
 	@Transactional
 	public void register(SingleUser singleUser) {
-		singleUser.setRole("ROLE_USER");
+		//singleUser.setRole("ROLE_USER");
+		singleUser.setRoleByAuthCode(111);
 		userRepository.save(singleUser);
 	}
 	
