@@ -36,6 +36,10 @@ public class Trainee {
 	private Set<JobOpportunity> jobOpportunities;
 	@ManyToOne
 	private Match match;
+	
+	// this is for retrieving job offers applied by the trainee user:
+	@OneToMany(mappedBy = "trainee")
+	private Set<JobOpportunity> jobOpportunity = new HashSet<>();	
 
 	public Trainee() {}
 	

@@ -1,11 +1,9 @@
 package com.fmdgroup.vatcher.controllers;
 
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -17,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.fmdgroup.vatcher.model.JobOpportunity;
 import com.fmdgroup.vatcher.model.SingleUser;
 import com.fmdgroup.vatcher.model.Trainee;
 import com.fmdgroup.vatcher.repositories.TraineeRepository;
@@ -29,8 +26,7 @@ import com.fmdgroup.vatcher.services.TraineeService;
 @Controller
 public class TraineeController {
 
-	@Autowired
-	ObjectMapper objectMapper;
+	
 	@Autowired
 	private ITraineeService service;
 	private TraineeService traineeService;
@@ -41,14 +37,11 @@ public class TraineeController {
 		super();
 		this.traineeRepository = traineeRepository;
 	}
-	@RequestMapping(method = RequestMethod.POST, value = "/addtrainee")
+	@RequestMapping(method = RequestMethod.POST, value = "/trainees")
 	
-	public String addTrainee(ModelMap model, @ModelAttribute Trainee trainee) throws Exception {
-		service.addTrainee(trainee);
-		populateModel(model);
-		return "singleUser";
-		
-	  
+	public String saveTrainee(@RequestBody Trainee trainee) {
+		traineeService.addTrainee(trainee);
+	        return "addUser" ;
 	    
 	       
 	    }
@@ -56,29 +49,32 @@ public class TraineeController {
 	@RequestMapping("/trainees")
 	public String getTrainees(Model model) {
 		model.addAttribute("trainees", traineeRepository.findAll());
-		return "singleUser";
+		return "trainee";
 	}
-	@RequestMapping(method = RequestMethod.POST, value = "/addJobPreferences/{id}")
-	public String updatePreferences(ModelMap model ,@RequestParam String jobPreference, @PathVariable Long id) throws Exception  {
 
-		service.updateJobPreferences(jobPreference, id);
-		populateModel(model);
-		return "singleUser";
-
-	}
 	@RequestMapping(method = RequestMethod.POST, value = "/addQualification/{id}")
 	
-	public String updateQualification(ModelMap model ,@RequestParam String qualification, @PathVariable Long id) throws Exception  {
-
-		service.updateQualification(qualification, id);
-		populateModel(model);
+	public String updateQualification(ModelMap model ,@RequestParam String qualification, @PathVariable Long id)  {
+		Set<String> traineeQualifications = service.traineeQualification();
+		traineeQualifications.add(qualification);
+		model.addAttribute(qualification, traineeQualifications);
+		
 		return "singleUser";
 
 		
 
 	}
-	private void populateModel(ModelMap model) {
-		model.addAttribute("trainees", service.findAllTrainee());
+	
+	// this is for retrieving job offers applied by the trainee user:
+	@RequestMapping("/trainees/{id}/jobOpportunities")							
+	public String getJobOpportunities(@PathVariable Long id, Model model) {
+	  try {
+	    Set<JobOpportunity> jobOpportunities = service.getJobOpportunities(id);
+	    model.addAttribute("jobOpportunities", jobOpportunities);
+	    return "jobOpportunities";
+	  } catch (Exception e) {
+	    return "error";
+	  }
 	}
 	
 
