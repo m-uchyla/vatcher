@@ -34,7 +34,6 @@ public TraineeService(JobOpportunityService jobOpportunityService) {
 //	public Set<String> traineeQualification(Long id) {
 //			
 //	}
-	
 	// this is for retrieving job offers applied by the trainee user:
 	@Override				
 	public Set<JobOpportunity> getJobOpportunities(Long traineeId) throws Exception {
@@ -47,18 +46,17 @@ public TraineeService(JobOpportunityService jobOpportunityService) {
 	  @Override
 	    public Set<JobOpportunity> getNotAppliedJobOpportunities(Trainee trainee) {
 		  Set<JobOpportunity> notApplied = new HashSet();
-	        Set<String> appliedJobTitles = trainee.getAppliedJobTitles();
+	        Set<JobOpportunity> appliedJobTitles = trainee.getJobOpportunities();
 	       
 	        List<JobOpportunity> allJobOpportunities;
-			try {
+			try { 
 				allJobOpportunities = jobOpportunityService.getAllJobOpportunities();
 	        if (allJobOpportunities == null || allJobOpportunities.isEmpty()) {
 	            throw new IllegalArgumentException("No job opportunities found.");
 	        }
-	        return allJobOpportunities.stream().filter(jobOpportunity -> !appliedJobTitles.contains(jobOpportunity.getJobTitle()))
+	        return allJobOpportunities.stream().filter(jobOpportunity -> !appliedJobTitles.contains(jobOpportunity))
 	            .collect(Collectors.toSet());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return notApplied;
 				
