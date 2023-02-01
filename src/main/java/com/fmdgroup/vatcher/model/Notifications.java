@@ -1,6 +1,6 @@
 package com.fmdgroup.vatcher.model;
 
-	import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -17,8 +17,6 @@ import javax.persistence.ManyToOne;
 		private Long id;
 		private String message;
 		@ManyToOne
-		private SingleUser sender;
-		@ManyToOne
 		private SingleUser receiver;
 		private Date timestamp;
 		private boolean read;
@@ -27,15 +25,21 @@ import javax.persistence.ManyToOne;
 		public Notifications() {
 		}
 		
-		public Notifications(String message, SingleUser sender, SingleUser receiver, Date timestamp, boolean read) {
+		public Notifications(String message, SingleUser receiver, Date timestamp, boolean read) {
 			super();
 			this.message = message;
-			this.sender = sender;
 			this.receiver = receiver;
 			this.timestamp = timestamp;
 			this.read = read;
 		}
 
+		public Long getId() {
+			return id;
+		}
+
+		public void setId(Long id) {
+			this.id = id;
+		}
 
 		public String getMessage() {
 			return message;
@@ -43,14 +47,6 @@ import javax.persistence.ManyToOne;
 
 		public void setMessage(String message) {
 			this.message = message;
-		}
-
-		public SingleUser getSender() {
-			return sender;
-		}
-
-		public void setSender(SingleUser sender) {
-			this.sender = sender;
 		}
 
 		public SingleUser getReceiver() {
@@ -79,7 +75,7 @@ import javax.persistence.ManyToOne;
 		
 		@Override
 		public int hashCode() {
-			return Objects.hash(message, sender, receiver);
+			return Objects.hash(message, receiver);
 		}
 		
 		@Override
@@ -96,8 +92,7 @@ import javax.persistence.ManyToOne;
 
 		@Override
 		public String toString() {
-			return "Notifications [message=" + message + ", sender=" +  ", receiver="
-					+ ", timestamp=" + timestamp + ", read=" + read + "]";
+			return "Notifications [message=" + message + ", receiver=" + receiver + ", timestamp=" + timestamp + "]";
 		}
 		
 	}
