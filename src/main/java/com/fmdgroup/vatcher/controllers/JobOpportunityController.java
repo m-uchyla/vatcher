@@ -1,10 +1,9 @@
 package com.fmdgroup.vatcher.controllers;
 
-<<<<<<< Updated upstream
 import java.security.Principal;
-=======
+
 import java.util.List;
->>>>>>> Stashed changes
+
 import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
@@ -105,7 +104,7 @@ public class JobOpportunityController {
 	    jobOpportunityRepository.save(jobOpportunity);
 	    return "redirect:/jobOpportunity/" + jobOpportunityID;
 	}
-<<<<<<< Updated upstream
+	
 	//allows the sales manager to activate/deactivate the job offer.
 	@PostMapping("/updateJobOpportunityStatus/{id}")
 	public String updateJobOpportunityStatus(@PathVariable Long id, @ModelAttribute JobOpportunity jobOpportunity, Principal principal) {
@@ -121,7 +120,11 @@ public class JobOpportunityController {
 	   }
 	   return "redirect:/jobOpportunity";
 	}
-=======
+	
+	@GetMapping("/jobOpportunity/{salesManagerId}")
+	  public List<JobOpportunity> getJobOpportunitiesBySalesManager(@PathVariable Long salesManagerId) {
+	    return JobOpportunityService.findBySalesManager(salesManagerId);
+	}
 
 	@GetMapping("/jobs")
     public List<JobOpportunity> getJobs(JobOpportunity filter) {
@@ -129,7 +132,6 @@ public class JobOpportunityController {
     
 
 }
->>>>>>> Stashed changes
 
 }
 
