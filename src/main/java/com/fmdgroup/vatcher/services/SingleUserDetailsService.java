@@ -1,5 +1,6 @@
 package com.fmdgroup.vatcher.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,10 @@ public class SingleUserDetailsService implements UserDetailsService{
 		
 		return new SingleUserDetails(singleUser.get());
 	}*/
+	
+	public List<SingleUser> getAllUsers(){
+		return userRepository.findAll();
+	}
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
