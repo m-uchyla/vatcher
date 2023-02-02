@@ -8,4 +8,5 @@ import com.fmdgroup.vatcher.model.Trainee;
 
 public interface TraineeRepository extends JpaRepository<Trainee, Long> {
 	
+	
 }

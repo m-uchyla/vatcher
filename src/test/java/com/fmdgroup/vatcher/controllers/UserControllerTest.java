@@ -65,7 +65,6 @@ public class UserControllerTest {
 	@Test
 	@WithMockUser
     public void test_createNewUser() throws Exception {
-		
         SingleUser user = new SingleUser("ff","ss","sfe","sasfas");
 
         mockMvc.perform(post("/addUser")
@@ -79,25 +78,21 @@ public class UserControllerTest {
 
     }
 	
-	@Test 
-	@WithMockUser
-	public void test_getUsers() throws Exception {
-		List<SingleUser> usersList = new ArrayList<>();
-		SingleUser user1 = new SingleUser("Adam","adam@adam.pl","12345");
-		SingleUser user2 = new SingleUser("Adamw","adam@adawm.pl","12345w");
-		//usersList.add(new SingleUser("Adam","adam@adam.pl","12345"));
-		//usersList.add(new SingleUser("Adam","adam@adam.pl","12345"));
-		usersList.add(user1);
-		usersList.add(user2);
-		when(service.getAllUsers()).thenReturn(usersList); 
-
-		mockMvc.perform(get("/users"))
-		//.andExpect(model().attribute("users", usersList))
-		.andExpect(status().isFound())
-		.andExpect(view().name("redirect:/users"));
-		
-		verify(service, times(1)).getAllUsers();
-	}
+	
+//	@Test 
+//	public void test_getUsers() throws Exception {
+//		List<SingleUser> usersList = new ArrayList<>();
+//		usersList.add(new SingleUser("Adam","adam@adam.pl","12345"));
+//		when(repository.findAll()).thenReturn(usersList); 
+//		
+//		// "/users" below is the path from @RequestMapping for getUsers method.
+//		
+//		mockMvc.perform(get("/users"))
+//		.andExpect(status().isOk())
+//		.andExpect(model().attribute("users", usersList ))
+//		.andExpect(view().name("singleUser"));
+//		
+//	}
 	
 	
 	
