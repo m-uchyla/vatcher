@@ -6,12 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -39,9 +37,6 @@ public class JobOpportunity {
 	private Set<Trainee> applicants;
 	@OneToMany
 	private Set<Match> matches;
-	@OneToOne
-	@JoinColumn(name = "sales_manager_id")
-	    private SalesManager salesManager;
  
 	
 	public JobOpportunity() {}
@@ -61,14 +56,7 @@ public class JobOpportunity {
 
 	}	
 	
-
-	public SalesManager getSalesManager() {
-		return salesManager;
-	}
-
-	public void setSalesManager(SalesManager salesManager) {
-		this.salesManager = salesManager;
-	}
+	
 
 	public boolean isActive() {			//change for active jobopportunities in controller
 		return active;
@@ -135,9 +123,11 @@ public class JobOpportunity {
 		this.skills = skills;
 	}
 
-public Set<Trainee> getApplicants() {
+	public Set<Trainee> getApplicants() {
 		return applicants;
 	}
+
+
 
 	public void setApplicants(Set<Trainee> applicants) {
 		this.applicants = applicants;
@@ -149,6 +139,16 @@ public Set<Trainee> getApplicants() {
 
 	public void setMatches(Set<Match> matches) {
 		this.matches = matches;
-	};
+	}
+
+	public boolean isExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void addApplicant(Trainee currentTrainee) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

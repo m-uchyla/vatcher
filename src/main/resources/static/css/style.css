@@ -1,0 +1,274 @@
+* {
+  font-family: "Poppins";
+}
+
+/* 
+#fd297b - WINTER SKY
+#ff5864 - FIERY ROSE
+#ff655b - BITTERSWEET
+#b6d094 - OLIVINE
+#27474e - DARK SLATE GRAY
+*/
+
+body {
+  margin: 0;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+nav{
+ 	display: flex;
+ 	flex-direction: row;
+ 	background-color: #27474E;
+  column-gap: 3rem;
+  padding-right: 3rem;
+  padding-left: 5rem;
+  justify-content: space-between;
+  align-items: center;
+  color:  white;
+}
+
+nav ul{
+	list-style-type: none;
+	overflow: hidden;
+  	display: flex;
+  	padding-top:0;
+  	padding-bottom:0;
+  	margin:0;
+}
+
+nav li{
+	margin-right:3rem;
+}
+
+nav h1 {
+  display: block;
+  color:white;
+  text-decoration: none; 
+  text-align: center;
+  cursor: pointer;
+  margin:0;
+}
+
+nav a{
+	display: block;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    padding: 1.2rem;
+    text-decoration: none
+}
+
+nav a:hover {
+  background-image: linear-gradient(to left bottom, #FD297B, #FF5864, #FF655B);
+}
+
+nav a:active {
+  box-shadow: inset 0 0 10px #27474e;
+}
+
+footer{
+	flex-shrink:0;
+ 	background-color: #27474E;
+  margin-top: 5rem;
+  align-items: center;
+  color:white;
+  font-size: 1rem;
+  text-align:center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+footer p{
+	margin:0
+}
+
+hr{
+	text-align:center;
+}
+
+.card{
+	 box-shadow: 0 10px 30px rgb(0 0 0 / 15%);
+}
+
+.singleCard{
+	padding-top:10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login{
+	padding:5rem;
+	padding-bottom:3rem;
+}
+
+.login h1{
+	margin-top:0px;
+	text-align:center;
+}
+
+.register{
+	margin-top:40px;
+	font-size:12px;
+	text-align:right;
+}
+
+.input{
+	display:flex;
+	align-items: center;
+	justify-content:space-between;
+}
+
+.input input{
+	height:50%;
+	width:60%
+}
+
+.center{
+	display:flex;
+	justify-content:center;
+}
+
+.button {
+	width:200px;
+	margin-top:20px;
+  color: white;
+  cursor: pointer;
+  min-height: 40px;
+  background-image: linear-gradient(to left bottom, #FD297B, #FF5864, #FF655B);
+  text-align: center;
+  font-weight: 600;
+  border: 0;
+  outline: none;
+}
+
+.button:hover {
+  box-shadow: rgba(0, 0, 0, 0.15) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.button:active {
+  box-shadow: none;
+  transform: translateY(0);
+  background-color: #00ceab;
+}
+
+.mainGrid{
+	display:flex;
+	padding:3rem;
+	column-gap:5rem;
+	
+}
+
+.feed{
+	flex-grow:3;
+	display:flex;
+	flex-direction:column;
+	margin-right:5rem;
+	gap:2rem;
+	
+}
+
+.profile{
+	flex-grow:1;
+}
+
+.opportunity{
+	padding:2rem;
+	display:flex;
+	justify-content:space-between;
+	height: -webkit-fill-available;
+	min-height: 50ex;
+	
+	
+}
+
+.opportunity i{
+	font-size:4rem;
+	visibility: hidden;
+}
+
+.opportunity:hover i{
+	visibility: visible;
+}
+
+.action{
+	display:flex;
+	flex-direction: column;
+	justify-content:space-evenly;
+}
+
+.heart{
+	cursor:pointer;
+	color: #27474e;
+}
+
+.heart:hover{
+	color:#fd297b;
+	transform: translateY(-2px);
+}
+
+.heart:active {
+  transform: translateY(0);
+}
+
+.cross{
+	cursor:pointer;
+	color: #27474e;
+}
+
+.cross:hover{
+	color:#b6d094;
+	transform: translateY(-2px);
+}
+
+.cross:active {
+  transform: translateY(0);
+}
+
+.userProfile{
+	padding:2rem;
+	text-align:center;
+}
+
+.userProfile p{
+	margin:0;
+}
+
+.applications{
+	padding-left:3rem;
+	padding-right:3rem;
+	color:red;
+}
+
+.sectionHeader{
+	color:#27474e;
+}
+
+.fa-bell{
+	font-size:25px!important;
+	color:#b6d094
+}
+
+.list{
+	display:flex;
+	flex-direction: column;
+
+}
+
+.list p{
+	min-width:15rem;
+	
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+.twoColumn{
+	display:flex;
+	flex-direction:row;
+}
+

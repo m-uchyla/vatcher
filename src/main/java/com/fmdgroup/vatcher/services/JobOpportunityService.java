@@ -51,16 +51,6 @@ public class JobOpportunityService implements IJobOpportunityService {
 		return optJobOpportunity.orElseThrow(()-> new Exception());
 	}
 	
-	@Override
-	public List<JobOpportunity> getJobOpportunitiesBySalesManager(Long salesManagerId) throws Exception {
-		return jobRepository.findBySalesManager(salesManagerId);
-	}
-
-	public static List<JobOpportunity> findBySalesManager(Long salesManagerId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	
 
 }

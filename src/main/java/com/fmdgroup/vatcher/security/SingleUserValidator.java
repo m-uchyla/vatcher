@@ -28,7 +28,7 @@ public class SingleUserValidator implements Validator{
 	public void validate(Object target, Errors errors) {
 		SingleUser singleUser = (SingleUser) target;
 		try {
-			singleUserDetailsService.loadUserByUsername(singleUser.getName());
+			singleUserDetailsService.loadUserByUsername(singleUser.getEmail());
 		}catch(UsernameNotFoundException ignored) {
 			return;
 		}
