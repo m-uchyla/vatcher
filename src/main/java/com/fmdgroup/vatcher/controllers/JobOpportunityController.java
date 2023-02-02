@@ -16,6 +16,7 @@ import java.util.Optional;
 import com.fmdgroup.vatcher.model.JobOpportunity;
 import com.fmdgroup.vatcher.model.SingleUser;
 import com.fmdgroup.vatcher.repositories.JobOpportunityRepository;
+import com.fmdgroup.vatcher.repositories.TraineeRepository;
 import com.fmdgroup.vatcher.services.JobOpportunityService;
 import com.fmdgroup.vatcher.services.SingleUserDetailsService;
 import com.fmdgroup.vatcher.services.TraineeService;
@@ -26,16 +27,18 @@ public class JobOpportunityController {
 	private final JobOpportunityService	service;																//which is used to access the data stored in the 
 	private TraineeService traineeService;
 	private SingleUserDetailsService userDetailsService;
+	private TraineeRepository traineeRepository;
 				
 	//job opportunity repository
 
 	public JobOpportunityController(JobOpportunityRepository jobOpportunityRepository, 
-			JobOpportunityService service, TraineeService traineeservice, SingleUserDetailsService userDetailsService) { //
+			JobOpportunityService service, TraineeService traineeservice, SingleUserDetailsService userDetailsService,TraineeRepository traineeRepository) { //
 		super();
 		this.jobOpportunityRepository = jobOpportunityRepository;
 		this.service = service;
 		this.traineeService = traineeservice;
 		this.userDetailsService = userDetailsService;
+		this.traineeRepository = traineeRepository;
 	}
 	
 	@RequestMapping("/jobOpportunity")	//pobieranie //method is responsible for handling requests 
@@ -56,6 +59,7 @@ public class JobOpportunityController {
 		public String getActiveJobOpportunities(Model model) {
 		model.addAttribute("user",userDetailsService.findUserFromCurrentSession());
 		model.addAttribute("jobOpportunity", jobOpportunityRepository.findByActiveTrue());
+		model.addAttribute("trainee", traineeRepository.findByUser(userDetailsService.findUserFromCurrentSession()));
 		return "opportunities";
 	}
 	
