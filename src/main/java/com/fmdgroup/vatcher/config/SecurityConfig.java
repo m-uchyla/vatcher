@@ -32,7 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 		.antMatchers("/admin").hasRole("ADMIN")
 		.antMatchers("/auth/login", "/auth/registration", "/error").permitAll()
-		.antMatchers("/auth/login", "/auth/registration", "/error", "/auth/change-password").permitAll()
+		.antMatchers("/auth/login", "/auth/registration", "/error", "/auth/change-password", "/css/**").permitAll()
+		.antMatchers("/**/*.js", "/**/*.css").permitAll()
 		.anyRequest().hasAnyRole("USER","ADMIN")
 		.and()
 		.formLogin().loginPage("/auth/login")
@@ -45,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.logout()
 		.logoutUrl("/logout")
 		.logoutSuccessUrl("/auth/login");
+
 	}
 
 	// setting the authentication
