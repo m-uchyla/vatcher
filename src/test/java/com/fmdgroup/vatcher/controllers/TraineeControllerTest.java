@@ -28,6 +28,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -63,6 +64,7 @@ import com.fmdgroup.vatcher.services.TraineeService;
 		private MockMvc mockMvc;
 		
 		@Test
+		@WithMockUser
 		public void test_updateQualification() throws Exception{
 			
 			//ArgumentCaptor<Trainee> mockTraineeCaptor = null;
@@ -83,6 +85,7 @@ import com.fmdgroup.vatcher.services.TraineeService;
 		}
 
 		@Test
+		@WithMockUser
 		public void test_updatePreferences() throws Exception{
 			
 			//ArgumentCaptor<Trainee> mockTraineeCaptor = null;
@@ -104,6 +107,7 @@ import com.fmdgroup.vatcher.services.TraineeService;
 		
 
 		@Test
+		@WithMockUser
 		public void test_AddTrainee() throws Exception  {
 			Set<String> qualifications = new HashSet<>();
 			Set<String> jobsPreferences = new HashSet<>();

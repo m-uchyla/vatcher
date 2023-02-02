@@ -1,5 +1,6 @@
 package com.fmdgroup.vatcher.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,5 +70,15 @@ public class JobOpportunityService implements IJobOpportunityService {
 		return jobRepository.save(jobOpportunity);							// and sets it to the desired value (active or deactive)
 	}
 	
+	//automatically deactivates a job offer if it has expired.
+	@Override
+	public JobOpportunity deactivateExpiredJobOpportunity(Long ID) throws Exception {
+	  JobOpportunity jobOpportunity = findJobOpportunityByID(ID);
+	  if (jobOpportunity.getExpirationDate().isBefore(LocalDate.now())) {
+	    jobOpportunity.setActive(false);
+	    return jobRepository.save(jobOpportunity);
+	  }
+	  return jobOpportunity;
+	}
 
 }

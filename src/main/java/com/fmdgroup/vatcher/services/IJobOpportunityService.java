@@ -20,4 +20,6 @@ public interface IJobOpportunityService {
 
 	JobOpportunity activateOrDeactivateJobOpportunity(Long ID, boolean active) throws Exception;
 
+	JobOpportunity deactivateExpiredJobOpportunity(Long ID) throws Exception;
+
 }

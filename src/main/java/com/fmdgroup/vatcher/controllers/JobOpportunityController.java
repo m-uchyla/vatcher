@@ -1,5 +1,6 @@
 package com.fmdgroup.vatcher.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -108,5 +109,23 @@ public class JobOpportunityController {
 	    jobOpportunityRepository.save(jobOpportunity);
 	    return "redirect:/jobOpportunity/" + jobOpportunityID;
 	
-}}
+		}
+	
+	//allows the sales manager to activate/deactivate the job offer.
+	@PostMapping("/updateJobOpportunityStatus/{id}")
+	public String updateJobOpportunityStatus(@PathVariable Long id, @ModelAttribute JobOpportunity jobOpportunity, Principal principal) {
+	   Optional<JobOpportunity> jobOpportunityOptional = jobOpportunityRepository.findById(id);
+	   if (jobOpportunityOptional.isPresent()) {
+	      JobOpportunity existingJobOpportunity = jobOpportunityOptional.get();
+	      if (principal.getName().equals("SALESMANAGER")) {
+	         existingJobOpportunity.setActive(jobOpportunity.isActive());
+	         jobOpportunityRepository.save(existingJobOpportunity);
+	      } else {
+	         return "Access Denied";
+	      }
+	   }
+	   return "redirect:/jobOpportunity";
+	}
+
+}
 
