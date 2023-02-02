@@ -1,5 +1,4 @@
 package com.fmdgroup.vatcher.model;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,7 +30,6 @@ public class JobOpportunity {
 	private String description;
 	private HashSet<String> skills;
 	private boolean active;				//for mapping only active jobopportunities in the controller
-	private LocalDate expirationDate;
 	
 	@ManyToOne
 	private Trainee trainee;		// this is for retrieving job offers applied 
@@ -49,7 +47,7 @@ public class JobOpportunity {
 	public JobOpportunity() {}
 
 	public JobOpportunity(String jobTitle, String company, String location, String duration, String description,
-			HashSet<String> skills, Set<Trainee> applicants, Set<Match> matches, LocalDate expirationDate) {
+			HashSet<String> skills, Set<Trainee> applicants, Set<Match> matches) {
 		super();
 		this.jobTitle = jobTitle;
 		this.company = company;
@@ -60,7 +58,6 @@ public class JobOpportunity {
         this.active	= true;		//kazda nowo dodana bedzie aktywna z automatu
 		this.applicants = applicants;
 		this.matches = matches;
-		this.expirationDate = expirationDate;
 
 	}	
 	
@@ -156,20 +153,12 @@ public Set<Trainee> getApplicants() {
 	
 
 public boolean isExpired() {
+	// TODO Auto-generated method stub
 	return false;
 }
 
 public void addApplicant(Trainee currentTrainee) {
+	// TODO Auto-generated method stub
 	
-}
-
-public LocalDate getExpirationDate() {
-    return expirationDate;
-}
-
-public void setExpirationDate(LocalDate expirationDate) {
-    this.expirationDate = expirationDate;
-		}
-
-}
+}}
 
