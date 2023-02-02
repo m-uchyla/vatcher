@@ -127,9 +127,32 @@ public class JobOpportunityController {
 	   return "redirect:/jobOpportunity";
 	}
 	
+	/// nie sprawdzane vlad
+	@GetMapping("/edit-job")
+	public String editJobOpportunityById(@ModelAttribute JobOpportunity jobOpportunity ) {
+		Optional<JobOpportunity> jobOpportunityOptional = jobOpportunityRepository.findById(jobOpportunity.getJob_id());
+		if(jobOpportunityOptional.isPresent()) {
+			jobOpportunityRepository.save(jobOpportunity);
+		}else {
+			System.out.println("Cant update because jobOpportunity with this id does not exist");
+		}
+		
+		
+		return "/jobs";
+	}
+	
 	@GetMapping("/jobs")
     public List<JobOpportunity> getJobs(JobOpportunity filter) {
-        return service.getJobs(filter);}
+        return service.getJobs(filter);
+        }
+	
+	
+	
+	
+	
+	
+	
+	
 } 
 
 
