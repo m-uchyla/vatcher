@@ -92,7 +92,8 @@ import javax.persistence.ManyToOne;
 
 		@Override
 		public String toString() {
-			return "Notifications [message=" + message + ", receiver=" + receiver + ", timestamp=" + timestamp + "]";
+			return "Notifications: [message=" + message + ", receiver=" + receiver + ", timestamp=" + timestamp
+					+ ", read=" + read + "]";
 		}
 		
 	}
