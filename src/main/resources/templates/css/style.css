@@ -163,7 +163,7 @@ hr{
 }
 
 .feed{
-	flex-grow:3;
+	flex-grow:2;
 	display:flex;
 	flex-direction:column;
 	margin-right:5rem;
@@ -270,5 +270,12 @@ hr{
 .twoColumn{
 	display:flex;
 	flex-direction:row;
+}
+
+.inputForTXT[type=text] {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 6px 0;
+  box-sizing: border-box;
 }
 

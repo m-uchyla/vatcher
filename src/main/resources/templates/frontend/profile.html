@@ -33,7 +33,14 @@
 			<div class="card opportunity" style="margin-left: 5rem">
 				<div class="list">
 					<h1>Edit profile</h1>
-
+					<form action="/changeUserData" method="post">
+						  <label for="name">Change name:</label><br>
+						  <input class="inputForTXT" type="text" id="name" name="name"><br>
+						  <label for="email">Change email:</label><br>
+						  <input class="inputForTXT" type="text" id="email" name="email"><br><br>
+						  <input class="button" type="submit" value="Submit changes">
+					</form>
+					<input class="button" type="submit" value="Change password">
 				</div>
 			</div>
 		</div>
@@ -59,6 +66,7 @@
 					 <p><label class="container">Preference <input type="checkbox">
 						<span class="checkmark"></span>
 					</label></p>
+					<input class="button" type="submit" value="Submit">
 					
 				</div>
 			</div>
@@ -82,7 +90,7 @@
 					 <p><label class="container">Qualification <input type="checkbox">
 						<span class="checkmark"></span>
 					</label></p>
-					</label>
+					<input class="button" type="submit" value="Submit">
 				</div>
 			</div>
 		</div>
