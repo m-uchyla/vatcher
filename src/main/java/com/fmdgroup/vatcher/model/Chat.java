@@ -2,26 +2,23 @@ package com.fmdgroup.vatcher.model;
 
 
 public class Chat {
-	private String sender;
+	private SingleUser sender;
 	private String content;
-	private String opportunityID;
+	private JobOpportunity opportunityID;
 	
 	public Chat() {
 	}
-	public Chat(String sender, String content, String opportunityID) {
+	public Chat(SingleUser sender, String content, JobOpportunity opportunityID) {
 		this.sender = sender;
 		this.content = content;
 		this.opportunityID = opportunityID;
-	}
-			
-		
-		
+	}	
 
-	public String getSender() {
+	public SingleUser getSender() {
 		return sender;
 	}
 
-	public void setSender(String sender) {
+	public void setSender(SingleUser sender) {
 		this.sender = sender;
 	}
 
@@ -32,10 +29,10 @@ public class Chat {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getOpportunityID() {
+	public JobOpportunity getOpportunityID() {
 		return opportunityID;
 	}
-	public void setOpportunityID(String opportunityID) {
+	public void setOpportunityID(JobOpportunity opportunityID) {
 		this.opportunityID = opportunityID;
 	}
 	

@@ -2,8 +2,10 @@
 package com.fmdgroup.vatcher.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +26,10 @@ import com.fmdgroup.vatcher.services.TraineeService;
 @Controller
 public class JobOpportunityController {
 	private final JobOpportunityRepository jobOpportunityRepository; //create an instance of JobOpportunityRepository 
+	
+	@Autowired
 	private final JobOpportunityService	service;																//which is used to access the data stored in the 
+	
 	private TraineeService traineeService;
 	private SingleUserDetailsService userDetailsService;
 	private TraineeRepository traineeRepository;
@@ -96,10 +101,96 @@ public class JobOpportunityController {
 	    return JobOpportunityService.findBySalesManager(salesManagerId);
 	  }
 	
+	
+	// /// nie sprawdzane vlad
+	@PostMapping("/applyJobOpportunity/{id}")
+	public String applyForJobOpportunity(@PathVariable("id") Long jobOpportunityID, @PathVariable("id") Long traineeId) {
+	    Optional<JobOpportunity> jobOpportunityOptional = jobOpportunityRepository.findById(jobOpportunityID);
+	    Optional<Trainee> traineeOptional = traineeRepository.findById(traineeId);
+	    JobOpportunity jobOpportunity = jobOpportunityOptional.get();
+	    Trainee trainee= traineeOptional.get();
+	    
+	    if (!traineeOptional.isPresent()) {
+		       // model.addAttribute("errorMessage", "Job opportunity not found.");
+		        return "error";
+		    }
+	    if (!jobOpportunityOptional.isPresent()) {
+	       // model.addAttribute("errorMessage", "Job opportunity not found.");
+	        return "error";
+	    }
+	    
+	    if (jobOpportunity.isExpired()) {
+	        //model.addAttribute("errorMessage", "Recruitment time has expired.");
+	        return "error";
+	    }
+	    jobOpportunity.getApplicants().add(trainee);
+	    trainee.getJobOpportunities().add(jobOpportunity);
+	    
+	    traineeRepository.save(trainee);
+	    jobOpportunityRepository.save(jobOpportunity);
+	    
+	    return "/jobs";
+	    
+	    
+	}
+	
+	
+	/// nie sprawdzane vlad
+		@GetMapping("/edit-job")
+		public String editJobOpportunityById(@ModelAttribute JobOpportunity jobOpportunity ) {
+			Optional<JobOpportunity> jobOpportunityOptional = jobOpportunityRepository.findById(jobOpportunity.getJob_id());
+			if(jobOpportunityOptional.isPresent()) {
+				jobOpportunityRepository.save(jobOpportunity);
+			}else {
+				System.out.println("Cant update because jobOpportunity with this id does not exist");
+			}
+			
+			
+			return "/jobs";
+		}
+	    
+	    
+	    
+	    /*if (!jobOpportunityOptional.isPresent()) {
+	        model.addAttribute("errorMessage", "Job opportunity not found.");
+	        return "error";
+	    }
+	    JobOpportunity jobOpportunity = jobOpportunityOptional.get();
+	    if (jobOpportunity.isExpired()) {
+	        model.addAttribute("errorMessage", "Recruitment time has expired.");
+	        return "error";
+	    }
+	    Trainee currentTrainee = traineeService.getCurrentTrainee();
+	    if (currentTrainee == null) {
+	        model.addAttribute("errorMessage", "You need to be a trainee to apply for this job opportunity.");
+	        return "error";
+	    }
+	    jobOpportunity.addApplicant(currentTrainee);
+	    jobOpportunityRepository.save(jobOpportunity);
+	    return "redirect:/jobOpportunity/" + jobOpportunityID;*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 //	method that allows a user with the role of trainee to add themselves to the list 
 //	of users who apply for this position. This function is to be unavailable after the 
 //	recruitment time has expired:
-	@PostMapping("/applyJobOpportunity/{id}")
+	/*@PostMapping("/applyJobOpportunity/{id}")
 	public String applyForJobOpportunity(@PathVariable("id") Long jobOpportunityID, Model model) {
 	    Optional<JobOpportunity> jobOpportunityOptional = jobOpportunityRepository.findById(jobOpportunityID);
 	    if (!jobOpportunityOptional.isPresent()) {
@@ -120,7 +211,7 @@ public class JobOpportunityController {
 	    jobOpportunityRepository.save(jobOpportunity);
 	    return "redirect:/jobOpportunity/" + jobOpportunityID;
 	
-}
+}*/
 //allows the sales manager to activate/deactivate the job offer.
 	@PostMapping("/updateJobOpportunityStatus/{id}")
 	public String updateJobOpportunityStatus(@PathVariable Long id, @ModelAttribute JobOpportunity jobOpportunity, Principal principal) {
@@ -137,39 +228,26 @@ public class JobOpportunityController {
 	   return "redirect:/jobOpportunity";
 	}
 	
-	/// nie sprawdzane vlad
-	@GetMapping("/edit-job")
-	public String editJobOpportunityById(@ModelAttribute JobOpportunity jobOpportunity ) {
-		Optional<JobOpportunity> jobOpportunityOptional = jobOpportunityRepository.findById(jobOpportunity.getJob_id());
-		if(jobOpportunityOptional.isPresent()) {
-			jobOpportunityRepository.save(jobOpportunity);
-		}else {
-			System.out.println("Cant update because jobOpportunity with this id does not exist");
-		}
-		
-		
-		return "/jobs";
-	}
+	
 	
 	@GetMapping("/jobs")
-
-    public List<JobOpportunity> getJobs(JobOpportunity filter) {
+	public String getJobsByFilter(String filter, Model model) {
+		List<JobOpportunity> jobsList = new ArrayList<>(service.getJobs("HSBC"));;
+		model.addAttribute("jobs", jobsList);
+        return "????????????????????????????????? ";
+    /*public List<JobOpportunity> getJobs(JobOpportunity filter) {
         return service.getJobs(filter);
-        }
+        }*/
 	
 	
 	
-	
-	
-	
-	
-	
+	}
 
-	public String getJobsPage(Model model, JobOpportunity filter) {
+	/*public String getJobsPage(Model model, JobOpportunity filter) {
 	  List<JobOpportunity> jobs = service.getJobs(filter);
 	  model.addAttribute("jobs", jobs);
 	  return "jobs";
-	}
+	}*/
 	
 
 //>>>>>>> 87f4751b2ee68f47684348f0c340c768e001c13c

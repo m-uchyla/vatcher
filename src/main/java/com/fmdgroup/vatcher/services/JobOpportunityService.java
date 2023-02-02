@@ -8,6 +8,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.fmdgroup.vatcher.model.JobOpportunity;
 import com.fmdgroup.vatcher.repositories.JobOpportunityRepository;
 
@@ -81,13 +83,17 @@ public class JobOpportunityService implements IJobOpportunityService {
 	  }
 	  return jobOpportunity;
 	}
+	///@RequestParam  add to the method
+	public List<JobOpportunity> getJobs( String company) {
+		company="HSBC";
+		return jobRepository.findByCompany(company);
+        /*return jobRepository.findByJobTitleContainingAndCompanyContainingAndLocationContainingAndDurationContainingAndDescriptionContaining(
+                filter.getJobTitle(), filter.getCompany(), filter.getLocation(),filter.getDuration(), filter.getDescription());*/
+        }
+	
+	
+	
 
-	public List<JobOpportunity> getJobs(JobOpportunity filter) {
-        return jobRepository.findByJobTitleContainingAndCompanyContainingAndLocationContainingAndDurationContainingAndDescriptionContaining(
-                filter.getJobTitle(), filter.getCompany(), filter.getLocation(),filter.getDuration(), filter.getDescription());}
-	
-	
-	
 	
 	/*public void editJobOpportunityById(Long id) {
 		 Optional<JobOpportunity> optJobOpportunity = jobRepository.findById(id);
