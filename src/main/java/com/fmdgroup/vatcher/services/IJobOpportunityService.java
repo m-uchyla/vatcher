@@ -18,6 +18,4 @@ public interface IJobOpportunityService {
 
 	List<JobOpportunity> getJobOpportunitiesBySalesManager(Long salesManagerId) throws Exception;
 
-	JobOpportunity activateOrDeactivateJobOpportunity(Long ID, boolean active) throws Exception;
-
 }

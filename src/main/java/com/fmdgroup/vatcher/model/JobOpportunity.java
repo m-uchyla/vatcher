@@ -149,16 +149,6 @@ public Set<Trainee> getApplicants() {
 
 	public void setMatches(Set<Match> matches) {
 		this.matches = matches;
-	}
+	};
 	
-
-public boolean isExpired() {
-	// TODO Auto-generated method stub
-	return false;
 }
-
-public void addApplicant(Trainee currentTrainee) {
-	// TODO Auto-generated method stub
-	
-}}
-

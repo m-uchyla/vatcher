@@ -9,26 +9,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.fmdgroup.vatcher.model.Trainee;
-import java.util.Optional;
+
 import com.fmdgroup.vatcher.model.JobOpportunity;
 import com.fmdgroup.vatcher.repositories.JobOpportunityRepository;
 import com.fmdgroup.vatcher.services.JobOpportunityService;
-import com.fmdgroup.vatcher.services.TraineeService;
 
 @Controller
 public class JobOpportunityController {
 	private final JobOpportunityRepository jobOpportunityRepository; //create an instance of JobOpportunityRepository 
 	private final JobOpportunityService	service;																//which is used to access the data stored in the 
-	private TraineeService traineeService;
-				
-	//job opportunity repository
+																	//job opportunity repository
 
-	public JobOpportunityController(JobOpportunityRepository jobOpportunityRepository, JobOpportunityService service, TraineeService traineeservice) { //
+	public JobOpportunityController(JobOpportunityRepository jobOpportunityRepository, JobOpportunityService service) { //
 		super();
 		this.jobOpportunityRepository = jobOpportunityRepository;
 		this.service = service;
-		this.traineeService = traineeservice;
 	}
 	
 	@RequestMapping("/jobOpportunity")	//pobieranie //method is responsible for handling requests 
@@ -84,29 +79,5 @@ public class JobOpportunityController {
 	    return JobOpportunityService.findBySalesManager(salesManagerId);
 	  }
 	
-//	method that allows a user with the role of trainee to add themselves to the list 
-//	of users who apply for this position. This function is to be unavailable after the 
-//	recruitment time has expired:
-	@PostMapping("/applyJobOpportunity/{id}")
-	public String applyForJobOpportunity(@PathVariable("id") Long jobOpportunityID, Model model) {
-	    Optional<JobOpportunity> jobOpportunityOptional = jobOpportunityRepository.findById(jobOpportunityID);
-	    if (!jobOpportunityOptional.isPresent()) {
-	        model.addAttribute("errorMessage", "Job opportunity not found.");
-	        return "error";
-	    }
-	    JobOpportunity jobOpportunity = jobOpportunityOptional.get();
-	    if (jobOpportunity.isExpired()) {
-	        model.addAttribute("errorMessage", "Recruitment time has expired.");
-	        return "error";
-	    }
-	    Trainee currentTrainee = traineeService.getCurrentTrainee();
-	    if (currentTrainee == null) {
-	        model.addAttribute("errorMessage", "You need to be a trainee to apply for this job opportunity.");
-	        return "error";
-	    }
-	    jobOpportunity.addApplicant(currentTrainee);
-	    jobOpportunityRepository.save(jobOpportunity);
-	    return "redirect:/jobOpportunity/" + jobOpportunityID;
-	
-}}
+}
 

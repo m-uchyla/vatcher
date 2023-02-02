@@ -61,13 +61,6 @@ public class JobOpportunityService implements IJobOpportunityService {
 		return null;
 	}
 	
-	//method that activates/deactivates a job offer
-	@Override
-	public JobOpportunity activateOrDeactivateJobOpportunity(Long ID, boolean active) throws Exception {
-		JobOpportunity jobOpportunity = findJobOpportunityByID(ID);			//it takes the ID of jobopp and a boolean
-		jobOpportunity.setActive(active);									//it retrieves the jobopp with the given ID
-		return jobRepository.save(jobOpportunity);							// and sets it to the desired value (active or deactive)
-	}
 	
 
 }
