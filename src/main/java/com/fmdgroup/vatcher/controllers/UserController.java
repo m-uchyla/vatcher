@@ -70,9 +70,8 @@ public class UserController {
 	
 	@RequestMapping("/authorize")
 	public String goTosetUserRole(Authentication authentication){
-		//SPRAWDZANIE, CZY UŻYTKOWNIK MA ROLĘ USER
-		if(true)return "auth/guest";
-		return "reditect:/users";
+		if(userDetailsService.findUserFromCurrentSession().getRole().contains("USER"))return "auth/guest";
+		return "redirect:/users";
 	}
 	
 	@PostMapping(value = "/authorize")
