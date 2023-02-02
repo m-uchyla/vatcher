@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>User Notifications</title>
+</head>
+<body>
+<h1>User Notifications table</h1>
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>Message</th>
+				<th>Receiver name</th>
+				<th>Receiver email</th>
+				<th>Date</th>
+				<th>Is read?</th>
+			</tr>
+			<tr th:each="notification : ${userNotifications}">
+				<td th:text="${notification.receiverId}"></td>
+				<td th:text="${notification.message}"></td>
+				<td th:text="${notification.receiver.name}"></td>
+				<td th:text="${notification.receiver.email}"></td>
+				<td th:text="${notification.timestamp}"></td>
+				<td th:text="${notification.read}"></td>
+			</tr>
+		</table>
+</body>
+</html>
