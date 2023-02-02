@@ -35,10 +35,17 @@ public class BootsStrapData implements CommandLineRunner {
 		userRepository.save(user2);
 		
 		System.out.println("Number of users: "+userRepository.count());
+<<<<<<< Updated upstream
 		
 	Notifications not1 = new Notifications("You have a notification.", user1, new Date() , false);
 
 	notificationsRepository.save(not1);
 	
+=======
+	
+		Notifications not1 = new Notifications("You have a notification.", user1, new Date() , false);
+	
+		notificationsRepository.save(not1);
+>>>>>>> Stashed changes
 	}
 }

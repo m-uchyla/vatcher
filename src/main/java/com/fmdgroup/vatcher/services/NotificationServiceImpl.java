@@ -10,6 +10,7 @@ import com.fmdgroup.vatcher.repositories.NotificationsRepository;
 
 @Service
 public class NotificationServiceImpl {
+<<<<<<< Updated upstream
 	@Autowired
 	
 	private NotificationsRepository notificationsRepository;
@@ -31,3 +32,26 @@ public class NotificationServiceImpl {
 //			return notificationsRepository.;
 //		}
 }		
+=======
+	
+@Autowired
+private NotificationsRepository notificationsRepository;
+
+	public String addNotification(Notifications notification) {
+		notificationsRepository.save(notification);
+		return "notifications";
+	}
+	
+	public List<Notifications> getAllNotifications() {
+		return notificationsRepository.findAll();
+	}
+
+	public Notifications getNotifications(Long receiverId) {
+		return notificationsRepository.findById(receiverId).get();
+	}
+	
+	public Notifications checkIfRead(boolean read) {
+		return notificationsRepository.;
+	}
+}
+>>>>>>> Stashed changes

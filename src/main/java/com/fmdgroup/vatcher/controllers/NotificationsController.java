@@ -1,7 +1,10 @@
 package com.fmdgroup.vatcher.controllers;
 
+<<<<<<< Updated upstream
 import javax.swing.JOptionPane;
 
+=======
+>>>>>>> Stashed changes
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.fmdgroup.vatcher.model.Notifications;
 import com.fmdgroup.vatcher.repositories.NotificationsRepository;
 import com.fmdgroup.vatcher.services.NotificationServiceImpl;
+
+import javax.swing.JOptionPane; //create a pop-up dialog with buttons to confirm if the notification was read
 
 @Controller
 public class NotificationsController {
@@ -34,6 +39,7 @@ public class NotificationsController {
 	
 	@GetMapping("/notifications")
 	public String getAllNotifications(Model model) {
+<<<<<<< Updated upstream
 	model.addAttribute("notifications", notificationsRepository.findAll());
 	return "notifications";
 	}
@@ -52,6 +58,26 @@ public class NotificationsController {
 	    }
 	}
 	
+=======
+		model.addAttribute("notifications", notificationsRepository.findAll());
+		return "notifications";
+	}
+	
+	@GetMapping("/userNotifications/{receiverId}")
+	public String getNotifications(Model model, @PathVariable Long receiverId) {
+		model.addAttribute("userNotifications", notificationServiceImpl.getNotifications(receiverId));
+		return "userNotifications";
+	}
+	
+	public void markAllAsRead(Model model) {
+	int option = JOptionPane.showConfirmDialog(null, "Mark as read", "Read", JOptionPane.YES_NO_OPTION);
+	      if (option == JOptionPane.YES_OPTION) {
+	    	  model.addAttribute("notifications", notificationsRepository.findAll());
+	    	  System.out.println("notifications");
+	    }
+	}
+	
+>>>>>>> Stashed changes
 	
 	
 //	@PostMapping("/newMessageNotifications")
