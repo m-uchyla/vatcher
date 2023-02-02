@@ -28,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// configure Spring Security (not default login page )
 		// configure roles
 		
-		http
+		http.csrf().disable()
 		.authorizeRequests()
 		.antMatchers("/admin").hasRole("ADMIN")
 		.antMatchers("/auth/login", "/auth/registration", "/error").permitAll()
