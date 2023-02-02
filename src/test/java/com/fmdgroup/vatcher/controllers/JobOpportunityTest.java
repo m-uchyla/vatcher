@@ -59,7 +59,7 @@ import com.fmdgroup.vatcher.services.TraineeService;
 		@WithMockUser
 		public void test_createNewJobs() throws Exception{
 			JobOpportunity jobOpportunity = new JobOpportunity("Job1", "Company1", "Location1", "Duration1", "Description1",
-					new HashSet<>(List.of("Skill1", "Skill1.2")), null, null);
+					new HashSet<>(List.of("Skill1", "Skill1.2")), null, null, null);
 			// mockMvc is model view controller - it allows us to pretend requests to the server.
 			mockMvc.perform(post("/addJobOpportunity")
 					.flashAttr("jobOpportunity", jobOpportunity)) //zamiast .param jest .falshAttr
@@ -77,9 +77,9 @@ import com.fmdgroup.vatcher.services.TraineeService;
 		public void getJobs() throws Exception {
 			List<JobOpportunity> jobOpportunitiesList = new ArrayList<>();
 			jobOpportunitiesList.add(new JobOpportunity("Job1", "Company1", "Location1", "Duration1", "Description1",
-			new HashSet<>(List.of("Skill1", "Skill1.2")), null, null));
+			new HashSet<>(List.of("Skill1", "Skill1.2")), null, null, null));
 			jobOpportunitiesList.add(new JobOpportunity("Job2", "Company2", "Location2", "Duration2", "Description2",
-			new HashSet<>(List.of("Skill2", "Skill3")), null, null));
+			new HashSet<>(List.of("Skill2", "Skill3")), null, null, null));
 			when(repository.findAll()).thenReturn(jobOpportunitiesList);
 						
 			mockMvc.perform(get("/jobOpportunity"))
@@ -95,9 +95,9 @@ import com.fmdgroup.vatcher.services.TraineeService;
 		public void getActiveJObs() throws Exception{
 			List<JobOpportunity> activeJobs = new ArrayList<>();
 				activeJobs.add(new JobOpportunity("Job1", "Company1", "Location1", "Duration1", "Description1",
-							new HashSet<>(List.of("Skill1", "Skill1.2")), null, null));
+							new HashSet<>(List.of("Skill1", "Skill1.2")), null, null, null));
 					activeJobs.add(new JobOpportunity("Job2", "Company2", "Location2", "Duration2", "Description2",
-							new HashSet<>(List.of("Skill2", "Skill3")), null, null));
+							new HashSet<>(List.of("Skill2", "Skill3")), null, null, null));
 			
 		when(repository.findByActiveTrue()).thenReturn(activeJobs);
 		
@@ -120,7 +120,7 @@ import com.fmdgroup.vatcher.services.TraineeService;
 		@WithMockUser
 		public void findJobOpportnityById() throws Exception{
 			JobOpportunity jobOpportunityById = new JobOpportunity("Job1", "Company1", "Location1", "Duration1", "Description1",
-					new HashSet<>(List.of("Skill1", "Skill1.2")), null, null);
+					new HashSet<>(List.of("Skill1", "Skill1.2")), null, null, null);
 			
 			when(service.findJobOpportunityByID(1L)).thenReturn(jobOpportunityById);
 			
@@ -138,7 +138,7 @@ import com.fmdgroup.vatcher.services.TraineeService;
 			Trainee currentTrainee = new Trainee();
 			
 			JobOpportunity jobOpportunity = new JobOpportunity("Job1", "Company1", "Location1", "Duration1", "Description1",
-					new HashSet<>(List.of("Skill1", "Skill1.2")), null, null);
+					new HashSet<>(List.of("Skill1", "Skill1.2")), null, null, null);
 			jobOpportunity.setJob_id(jobOpportunityID);
 			
 			when(repository.findById(jobOpportunityID)).thenReturn(Optional.of(jobOpportunity));
@@ -169,3 +169,4 @@ import com.fmdgroup.vatcher.services.TraineeService;
 		}
 		
 	}
+	

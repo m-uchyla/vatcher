@@ -46,7 +46,7 @@ public class TraineeServiceImplTest {
     public void testGetJobOpportunities() throws Exception {
         Trainee trainee = new Trainee();
         Set<JobOpportunity> jobOpportunities = new HashSet<>();
-        jobOpportunities.add(new JobOpportunity("Software Engineer", "Google", "Mountain View, CA", null, null, null, null, null));
+        jobOpportunities.add(new JobOpportunity("Software Engineer", "Google", "Mountain View, CA", null, null, null, null, null, null));
         trainee.setJobOpportunities(jobOpportunities);
         Long traineeId = 1L;
         when(traineeService.getJobOpportunities(traineeId)).thenReturn(jobOpportunities);
@@ -60,14 +60,14 @@ public class TraineeServiceImplTest {
     @Test
     public void testGetNotAppliedJobOpportunities() throws Exception {
         Trainee trainee = new Trainee();
-        JobOpportunity jobOpportunity = new JobOpportunity("Software Engineer", "Google", "Mountain View, CA", null, null, null, null, null);
+        JobOpportunity jobOpportunity = new JobOpportunity("Software Engineer", "Google", "Mountain View, CA", null, null, null, null, null, null);
         Set<JobOpportunity> appliedJobs = new HashSet<>();
         appliedJobs.add(jobOpportunity);
         trainee.setJobOpportunities(appliedJobs);
 
         List<JobOpportunity> allJobOpportunities = new ArrayList<>();
-        allJobOpportunities.add(new JobOpportunity("Software Engineer", "Google", "Mountain View, CA", null, null, null, null, null));
-        allJobOpportunities.add(new JobOpportunity("Data Scientist", "Facebook", "Menlo Park, CA", null, null, null, null, null));
+        allJobOpportunities.add(new JobOpportunity("Software Engineer", "Google", "Mountain View, CA", null, null, null, null, null, null));
+        allJobOpportunities.add(new JobOpportunity("Data Scientist", "Facebook", "Menlo Park, CA", null, null, null, null, null, null));
         when(traineeService.getNotAppliedJobOpportunities(trainee)).thenReturn(
         		allJobOpportunities.stream().filter(job -> !appliedJobs.contains(job))
 	            .collect(Collectors.toSet())
