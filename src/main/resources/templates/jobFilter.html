@@ -14,12 +14,12 @@
 				<th>Duration</th>
 				<th>Description</th>
 			</tr>
-			<tr th:each="jobs : ${jobs}">
-				<td th:text="${jobs.JobTitle}"></td>
-				<td th:text="${jobs.Company}"></td>
-				<td th:text="${jobs.Location}"></td>
-				<td th:text="${user.Duration}"></td>
-				<td th:text="${user.Description}"></td>
+			<tr th:each="job : ${jobs}">
+				<td th:text="${job.JobTitle}"></td>
+				<td th:text="${job.Company}"></td>
+				<td th:text="${job.Location}"></td>
+				<td th:text="${job.Duration}"></td>
+				<td th:text="${job.Description}"></td>
 			</tr>
 		</table>
 </body>
