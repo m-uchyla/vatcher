@@ -50,7 +50,7 @@ public class JobOpportunityController {
 	@RequestMapping("/activeJobOpportunities")							//to handle HTTP POST requests
 		public String getActiveJobOpportunities(Model model) {
 		model.addAttribute("jobOpportunity", jobOpportunityRepository.findByActiveTrue());
-		return "addUser"; 
+		return "opportunities"; 
 
 	}
 	
