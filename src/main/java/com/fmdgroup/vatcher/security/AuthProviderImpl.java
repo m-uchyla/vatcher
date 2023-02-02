@@ -38,9 +38,10 @@ public class AuthProviderImpl implements AuthenticationProvider{
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		System.out.println("Auteticate method/ AuthProviderimpl start");
-		String name = authentication.getName();
+		//String name = authentication.getName();
+		String email = authentication.getName();
 		
-		UserDetails singleUserDetails = singleUserDetailsService.loadUserByUsername(name);
+		UserDetails singleUserDetails = singleUserDetailsService.loadUserByUsername(email);
 		
 		String password = authentication.getCredentials().toString();
 		
