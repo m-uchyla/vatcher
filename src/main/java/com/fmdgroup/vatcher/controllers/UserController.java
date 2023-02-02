@@ -44,6 +44,9 @@ public class UserController {
 	@RequestMapping("/users")
 	public String getUsers(Model model) {
 		model.addAttribute("users", userRepository.findAll());
+		System.out.println("Singfle user form controller --------------------------------------");
+		System.out.println("userDetailsService.findUserFromCurrentSession();" + userDetailsService.findUserFromCurrentSession().toString());
+		System.out.println("Singfle user form controller --------------------------------------");
 		return "singleUser";
 		// singleUser is a view, it is name of html file that makes view.
 	}
@@ -82,11 +85,11 @@ public class UserController {
 	public String changePassword(@RequestParam("email") String email,@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword) {
 			Integer hashedOldPassword = oldPassword.hashCode();
 			String hashedOldPasswordString = hashedOldPassword.toString();
-			UserDetails singleUserDetails = userDetailsService.loadUserByEmailForPasswordChange(email);
-			SingleUserDetails singleUserDetails1 = (SingleUserDetails) singleUserDetails;
-			if(singleUserDetails.getPassword().equals(hashedOldPasswordString)) {
+			UserDetails userDetails = userDetailsService.loadUserByEmailForPasswordChange(email);
+			SingleUserDetails singleUserDetails1 = (SingleUserDetails) userDetails;
+			if(userDetails.getPassword().equals(hashedOldPasswordString)) {
 			    singleUserDetails1.setPassword(newPassword);
-			    singleUserDetails = (UserDetails) singleUserDetails1;
+			    userDetails = (UserDetails) singleUserDetails1;
 			    userDetailsService.saveUserToDb(singleUserDetails1);
 			    
 			}else {

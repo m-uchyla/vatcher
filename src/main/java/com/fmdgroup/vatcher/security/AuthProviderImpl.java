@@ -40,6 +40,7 @@ public class AuthProviderImpl implements AuthenticationProvider{
 		System.out.println("Auteticate method/ AuthProviderimpl start");
 		//String name = authentication.getName();
 		String email = authentication.getName();
+		singleUserDetailsService.setAuthenticationObject(authentication);
 		
 		UserDetails singleUserDetails = singleUserDetailsService.loadUserByUsername(email);
 		
