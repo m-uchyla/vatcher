@@ -57,16 +57,50 @@ public class BootsStrapData implements CommandLineRunner {
 			 "1 year",
 			 "Simple description",
 			 skillSet);
+	 
+	 JobOpportunity jobOpportunity2 = new JobOpportunity(
+			 "Data Enginner", 
+			 "HSBC", 
+			 "Wroclaw", 
+			 "1 year",
+			 "Simple description1",
+			 skillSet);
+	 
+	 JobOpportunity jobOpportunity3 = new JobOpportunity(
+			 "Software Developer", 
+			 "Google", 
+			 "Frankfurt", 
+			 "2 year",
+			 "Simple description2",
+			 skillSet);
+	 
+	 JobOpportunity jobOpportunity4 = new JobOpportunity(
+			 "Software Tester", 
+			 "HSBC", 
+			 "Warsaw", 
+			 "2 year",
+			 "Simple description3",
+			 skillSet);
+	 
+	 JobOpportunity jobOpportunity5 = new JobOpportunity(
+			 "Software Tester", 
+			 "Shell", 
+			 "New York", 
+			 "3 year",
+			 "Simple description4",
+			 skillSet);
+	 
+	 
 	 //JobOpportunity jobOpportunity2 = new JobOpportunity("Data Enginner", "HSBC", "Wroclaw", "Remote");
 	 //JobOpportunity jobOpportunity3 = new JobOpportunity("Software Developer", "Google", "New York", "Office");
 	// JobOpportunity jobOpportunity4 = new JobOpportunity("Software tester", "Amazon", "Warsaw", "Remote");
 	 //JobOpportunity jobOpportunity5 = new JobOpportunity("Software Developer", "Facebook", "Frankfurt", "Office");
 	 
 	 jobOpportunityRepository.save(jobOpportunity1);
-//	 jobOpportunityRepository.save(jobOpportunity2);
-//	 jobOpportunityRepository.save(jobOpportunity3);
-//	 jobOpportunityRepository.save(jobOpportunity4);
-//	 jobOpportunityRepository.save(jobOpportunity5);
+	 jobOpportunityRepository.save(jobOpportunity2);
+	 jobOpportunityRepository.save(jobOpportunity3);
+	 jobOpportunityRepository.save(jobOpportunity4);
+	 jobOpportunityRepository.save(jobOpportunity5);
 	
 	
 	}
