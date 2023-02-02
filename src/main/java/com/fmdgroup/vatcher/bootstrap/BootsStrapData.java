@@ -15,6 +15,7 @@ import com.fmdgroup.vatcher.model.SingleUser;
 import com.fmdgroup.vatcher.model.Trainee;
 import com.fmdgroup.vatcher.repositories.JobOpportunityRepository;
 import com.fmdgroup.vatcher.repositories.NotificationsRepository;
+import com.fmdgroup.vatcher.repositories.TraineeRepository;
 import com.fmdgroup.vatcher.repositories.UserRepository;
 
 @Component
@@ -23,12 +24,14 @@ public class BootsStrapData implements CommandLineRunner {
 	private final UserRepository userRepository;
 	private final NotificationsRepository notificationsRepository;
 	private final JobOpportunityRepository jobOpportunityRepository;
+	private final TraineeRepository traineeRepository;
 
-	public BootsStrapData(UserRepository userRepository, NotificationsRepository notificationsRepository, JobOpportunityRepository jobOpportunitesRepository) {
+	public BootsStrapData(UserRepository userRepository, NotificationsRepository notificationsRepository, JobOpportunityRepository jobOpportunitesRepository, TraineeRepository traineeRepository) {
 		super();
 		this.userRepository = userRepository;
 		this.notificationsRepository = notificationsRepository;
 		this.jobOpportunityRepository = jobOpportunitesRepository;
+		this.traineeRepository = traineeRepository;
 	}
 
 	
@@ -43,52 +46,56 @@ public class BootsStrapData implements CommandLineRunner {
 		userRepository.save(user1);
 		userRepository.save(user2);
 		
+		Trainee trainee = new Trainee(user2);
+		
+		traineeRepository.save(trainee);
+		
 		System.out.println("Number of users: "+userRepository.count());
 		
-	Notifications not1 = new Notifications("You have a notification.", user1, new Date() , false);
-
-	notificationsRepository.save(not1);
-	Set<String> skillSet = new HashSet<>();
+		Notifications not1 = new Notifications("You have a notification.", user1, new Date() , false);
 	
-	 JobOpportunity jobOpportunity1 = new JobOpportunity(
-			 "Software Enginner", 
-			 "Shell", 
-			 "Warsaw", 
-			 "1 year",
-			 "Simple description",
-			 skillSet);
-	 
-	 JobOpportunity jobOpportunity2 = new JobOpportunity(
-			 "Data Enginner", 
-			 "HSBC", 
-			 "Wroclaw", 
-			 "1 year",
-			 "Simple description1",
-			 skillSet);
-	 
-	 JobOpportunity jobOpportunity3 = new JobOpportunity(
-			 "Software Developer", 
-			 "Google", 
-			 "Frankfurt", 
-			 "2 year",
-			 "Simple description2",
-			 skillSet);
-	 
-	 JobOpportunity jobOpportunity4 = new JobOpportunity(
-			 "Software Tester", 
-			 "HSBC", 
-			 "Warsaw", 
-			 "2 year",
-			 "Simple description3",
-			 skillSet);
-	 
-	 JobOpportunity jobOpportunity5 = new JobOpportunity(
-			 "Software Tester", 
-			 "Shell", 
-			 "New York", 
-			 "3 year",
-			 "Simple description4",
-			 skillSet);
+		notificationsRepository.save(not1);
+		Set<String> skillSet = new HashSet<>();
+		
+		 JobOpportunity jobOpportunity1 = new JobOpportunity(
+				 "Software Enginner", 
+				 "Shell", 
+				 "Warsaw", 
+				 "1 year",
+				 "Simple description",
+				 skillSet);
+		 
+		 JobOpportunity jobOpportunity2 = new JobOpportunity(
+				 "Data Enginner", 
+				 "HSBC", 
+				 "Wroclaw", 
+				 "1 year",
+				 "Simple description1",
+				 skillSet);
+		 
+		 JobOpportunity jobOpportunity3 = new JobOpportunity(
+				 "Software Developer", 
+				 "Google", 
+				 "Frankfurt", 
+				 "2 year",
+				 "Simple description2",
+				 skillSet);
+		 
+		 JobOpportunity jobOpportunity4 = new JobOpportunity(
+				 "Software Tester", 
+				 "HSBC", 
+				 "Warsaw", 
+				 "2 year",
+				 "Simple description3",
+				 skillSet);
+		 
+		 JobOpportunity jobOpportunity5 = new JobOpportunity(
+				 "Software Tester", 
+				 "Shell", 
+				 "New York", 
+				 "3 year",
+				 "Simple description4",
+				 skillSet);
 	 
 	 
 	 //JobOpportunity jobOpportunity2 = new JobOpportunity("Data Enginner", "HSBC", "Wroclaw", "Remote");
