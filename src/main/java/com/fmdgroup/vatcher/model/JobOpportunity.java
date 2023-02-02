@@ -1,4 +1,6 @@
+
 package com.fmdgroup.vatcher.model;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -6,10 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +32,7 @@ public class JobOpportunity {
 	private String description;
 	private HashSet<String> skills;
 	private boolean active;				//for mapping only active jobopportunities in the controller
+	private LocalDate expirationDate;
 	
 	@ManyToOne
 	private Trainee trainee;		// this is for retrieving job offers applied 
@@ -37,12 +42,15 @@ public class JobOpportunity {
 	private Set<Trainee> applicants;
 	@OneToMany
 	private Set<Match> matches;
+	@OneToOne
+	@JoinColumn(name = "sales_manager_id")
+	    private SalesManager salesManager;
  
 	
 	public JobOpportunity() {}
 
 	public JobOpportunity(String jobTitle, String company, String location, String duration, String description,
-			HashSet<String> skills, Set<Trainee> applicants, Set<Match> matches) {
+			HashSet<String> skills, Set<Trainee> applicants, Set<Match> matches, LocalDate expirationDate) {
 		super();
 		this.jobTitle = jobTitle;
 		this.company = company;
@@ -53,10 +61,18 @@ public class JobOpportunity {
         this.active	= true;		//kazda nowo dodana bedzie aktywna z automatu
 		this.applicants = applicants;
 		this.matches = matches;
+		this.expirationDate = expirationDate;
 
 	}	
 	
-	
+
+	public SalesManager getSalesManager() {
+		return salesManager;
+	}
+
+	public void setSalesManager(SalesManager salesManager) {
+		this.salesManager = salesManager;
+	}
 
 	public boolean isActive() {			//change for active jobopportunities in controller
 		return active;
@@ -123,11 +139,9 @@ public class JobOpportunity {
 		this.skills = skills;
 	}
 
-	public Set<Trainee> getApplicants() {
+public Set<Trainee> getApplicants() {
 		return applicants;
 	}
-
-
 
 	public void setApplicants(Set<Trainee> applicants) {
 		this.applicants = applicants;
@@ -140,15 +154,24 @@ public class JobOpportunity {
 	public void setMatches(Set<Match> matches) {
 		this.matches = matches;
 	}
+	
 
-	public boolean isExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+public boolean isExpired() {
+	// TODO Auto-generated method stub
+	return false;
+}
 
-	public void addApplicant(Trainee currentTrainee) {
-		// TODO Auto-generated method stub
-		
-	}
+public void addApplicant(Trainee currentTrainee) {
+	// TODO Auto-generated method stub
 	
 }
+public LocalDate getExpirationDate() {
+    return expirationDate;
+}
+
+public void setExpirationDate(LocalDate expirationDate) {
+    this.expirationDate = expirationDate;
+		}
+
+}
+

@@ -1,3 +1,5 @@
+
+
 package com.fmdgroup.vatcher.model;
 
 import java.util.HashSet;
