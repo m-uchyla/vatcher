@@ -82,4 +82,8 @@ public class JobOpportunityService implements IJobOpportunityService {
 	  return jobOpportunity;
 	}
 
+	public List<JobOpportunity> getJobs(JobOpportunity filter) {
+        return jobRepository.findByJobTitleContainingAndCompanyContainingAndLocationContainingAndDurationContainingAndDescriptionContaining(
+                filter.getJobTitle(), filter.getCompany(), filter.getLocation(),filter.getDuration(), filter.getDescription());}
+	
 }

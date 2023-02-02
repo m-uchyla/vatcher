@@ -126,6 +126,10 @@ public class JobOpportunityController {
 	   }
 	   return "redirect:/jobOpportunity";
 	}
+	
+	@GetMapping("/jobs")
+    public List<JobOpportunity> getJobs(JobOpportunity filter) {
+        return service.getJobs(filter);}
 } 
 
 
