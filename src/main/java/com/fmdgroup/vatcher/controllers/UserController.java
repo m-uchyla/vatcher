@@ -75,9 +75,12 @@ public class UserController {
 	}
 	
 	@PostMapping(value = "/authorize")
-	public String setUserRole(ModelMap model, @RequestParam("code") String code) {
-		//POBIERANIE UŻYTKOWNIKA
-		return "redirect:/users";
+	public String setUserRole(ModelMap model, @RequestParam("code") int code) {
+		SingleUser user = userDetailsService.findUserFromCurrentSession();
+		user.setRoleByAuthCode(code);
+		userRepository.save(user);
+		System.out.println(user.toString());
+		return "redirect:/logout";
 	}
 	
 	@GetMapping("/auth/change-password")
