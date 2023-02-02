@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Job List</h1>
+		<table>
+			<tr>
+				<th>JobTitle</th>
+				<th>Company</th>
+				<th>Location</th>
+				<th>Duration</th>
+				<th>Description</th>
+			</tr>
+			<tr th:each="jobs : ${jobs}">
+				<td th:text="${jobs.JobTitle}"></td>
+				<td th:text="${jobs.Company}"></td>
+				<td th:text="${jobs.Location}"></td>
+				<td th:text="${user.Duration}"></td>
+				<td th:text="${user.Description}"></td>
+			</tr>
+		</table>
+</body>
+</html>
