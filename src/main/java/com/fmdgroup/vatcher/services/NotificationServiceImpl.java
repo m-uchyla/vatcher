@@ -10,9 +10,10 @@ import com.fmdgroup.vatcher.repositories.NotificationsRepository;
 
 @Service
 public class NotificationServiceImpl {
-	@Autowired
 	
-	private NotificationsRepository notificationsRepository;
+	@Autowired
+		private NotificationsRepository notificationsRepository;
+		private Notifications notification;
 
 		public String addNotification(Notifications notification) {
 			notificationsRepository.save(notification);
@@ -27,7 +28,7 @@ public class NotificationServiceImpl {
 			return notificationsRepository.findById(receiverId).get();
 		}
 		
-//		public Notifications checkIfRead(boolean read) {
-//			return notificationsRepository.;
-//		}
+		public void checkIfRead() {
+//			return notification.isRead();
+		}
 }		

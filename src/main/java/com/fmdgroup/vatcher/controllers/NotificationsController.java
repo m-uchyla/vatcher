@@ -20,10 +20,12 @@ public class NotificationsController {
 	
 @Autowired
 	private NotificationServiceImpl notificationServiceImpl;
+//	private Notifications notification;
 
 	public NotificationsController(NotificationsRepository notificationsRepository) {
 		super();
 		this.notificationsRepository = notificationsRepository;
+//		this.notification = notification;
 	}
 	
 	@PostMapping("/notifications")
@@ -44,14 +46,13 @@ public class NotificationsController {
 	return "userNotifications";
 	}
 	
-	public void markAllAsRead(Model model) {
+//	@GetMapping("/notifications")
+	public void checkIfRead(@PathVariable Long receiverId) {
 	int option = JOptionPane.showConfirmDialog(null, "Mark as read", "Read", JOptionPane.YES_NO_OPTION);
-	      if (option == JOptionPane.YES_OPTION) {
-	    	  model.addAttribute("notifications", notificationsRepository.findAll());
-	    	  System.out.println("notifications");
-	    }
+	      if (option == JOptionPane.YES_OPTION && notificationServiceImpl.getNotifications(receiverId).isRead()==false) {
+	    	  notificationServiceImpl.getNotifications(receiverId).setRead(true);
+	      }
 	}
-	
 	
 	
 //	@PostMapping("/newMessageNotifications")
