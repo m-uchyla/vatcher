@@ -127,8 +127,6 @@ public class JobOpportunity {
 		return applicants;
 	}
 
-
-
 	public void setApplicants(Set<Trainee> applicants) {
 		this.applicants = applicants;
 	}

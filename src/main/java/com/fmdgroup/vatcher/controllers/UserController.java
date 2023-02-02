@@ -60,11 +60,17 @@ public class UserController {
 		regService.register( user);
 		return "redirect:/users";
 		// redirect:/users -> after new user is created it redirects to path/users
-
 	}
 	
 	@RequestMapping("/admin")
 	public String testAdminRole(){return "admin";}
+	
+	@RequestMapping("/authorize")
+	public String goTosetUserRole(Authentication authentication){
+		//SPRAWDZANIE, CZY UŻYTKOWNIK MA ROLĘ USER
+		if(true)return "auth/guest";
+		return "reditect:/users";
+	}
 	
 	@GetMapping("/auth/change-password")
 	public String changePasswordPage(@ModelAttribute("singleUser") SingleUser singleUser) {
