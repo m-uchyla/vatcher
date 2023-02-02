@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Vatcher - Opportunities</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" th:href="@{/css/style.css}" />
 <link
       rel="stylesheet"
       href="https:/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -34,6 +34,18 @@
 				 <i class="fa fa-times cross" style="font-size:5rem;" aria-hidden="true"></i>
 			 </div>
 		</div>
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Password</th>
+			</tr>
+			<tr th:each="job : jobOpportunities">
+				<td th:text="${job.jobTitle}"></td>
+				<td th:text="${job.company}"></td>
+				<td th:text="${job.location}"></td>
+			</tr>
+		</table>
 		<div class="card opportunity">
 			<div class="desc">
 				 <h1>Opportunity 2</h1>

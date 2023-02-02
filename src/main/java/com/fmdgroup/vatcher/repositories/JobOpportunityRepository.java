@@ -8,7 +8,7 @@ public interface JobOpportunityRepository extends JpaRepository<JobOpportunity ,
 	
 	List<JobOpportunity> findByActiveTrue();	//for active jobopportunities
 
-	List<JobOpportunity> findByJobTitleContainingAndComapnyContainingAndLocationContainingAndDescriptionContaining(
+	List<JobOpportunity> findByJobTitleContainingAndCompanyContainingAndLocationContainingAndDescriptionContaining(
 			String jobTitle, String company, String location, String description);
 
 	List<JobOpportunity> findBySalesManager(Long salesManagerId);

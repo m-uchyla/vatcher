@@ -1,13 +1,18 @@
 package com.fmdgroup.vatcher.bootstrap;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import java.time.LocalDate;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.fmdgroup.vatcher.model.JobOpportunity;
+import com.fmdgroup.vatcher.model.Match;
 import com.fmdgroup.vatcher.model.Notifications;
 import com.fmdgroup.vatcher.model.SingleUser;
+import com.fmdgroup.vatcher.model.Trainee;
 import com.fmdgroup.vatcher.repositories.JobOpportunityRepository;
 import com.fmdgroup.vatcher.repositories.NotificationsRepository;
 import com.fmdgroup.vatcher.repositories.UserRepository;
@@ -43,27 +48,28 @@ public class BootsStrapData implements CommandLineRunner {
 	Notifications not1 = new Notifications("You have a notification.", user1, new Date() , false);
 
 	notificationsRepository.save(not1);
+	Set<String> skillSet = new HashSet<>();
+	
+	 JobOpportunity jobOpportunity1 = new JobOpportunity(
+			 "Software Enginner", 
+			 "Shell", 
+			 "Warsaw", 
+			 "1 year",
+			 "Simple description",
+			 skillSet);
+	 //JobOpportunity jobOpportunity2 = new JobOpportunity("Data Enginner", "HSBC", "Wroclaw", "Remote");
+	 //JobOpportunity jobOpportunity3 = new JobOpportunity("Software Developer", "Google", "New York", "Office");
+	// JobOpportunity jobOpportunity4 = new JobOpportunity("Software tester", "Amazon", "Warsaw", "Remote");
+	 //JobOpportunity jobOpportunity5 = new JobOpportunity("Software Developer", "Facebook", "Frankfurt", "Office");
+	 
+	 jobOpportunityRepository.save(jobOpportunity1);
+//	 jobOpportunityRepository.save(jobOpportunity2);
+//	 jobOpportunityRepository.save(jobOpportunity3);
+//	 jobOpportunityRepository.save(jobOpportunity4);
+//	 jobOpportunityRepository.save(jobOpportunity5);
 	
 	
 	}
-	 
-	public void run1(String... args) throws Exception {
-		 
-		 JobOpportunity jobOpportunity1 = new JobOpportunity("Software Enginner", "Shell", "Warsaw", "Office");
-		 JobOpportunity jobOpportunity2 = new JobOpportunity("Data Enginner", "HSBC", "Wroclaw", "Remote");
-		 JobOpportunity jobOpportunity3 = new JobOpportunity("Software Developer", "Google", "New York", "Office");
-		 JobOpportunity jobOpportunity4 = new JobOpportunity("Software tester", "Amazon", "Warsaw", "Remote");
-		 JobOpportunity jobOpportunity5 = new JobOpportunity("Software Developer", "Facebook", "Frankfurt", "Office");
-		 
-		 jobOpportunityRepository.save(jobOpportunity1);
-		 jobOpportunityRepository.save(jobOpportunity2);
-		 jobOpportunityRepository.save(jobOpportunity3);
-		 jobOpportunityRepository.save(jobOpportunity4);
-		 jobOpportunityRepository.save(jobOpportunity5);
-		 
-
-		}
-	
 	
 	
 }

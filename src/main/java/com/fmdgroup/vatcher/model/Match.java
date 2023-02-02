@@ -20,16 +20,14 @@ public class Match {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-
 	private Long id;
+	
 	@ManyToOne
-	@JoinTable(name = "Job_Opportunities", joinColumns = @JoinColumn(name = "id"))
-
+	@JoinColumn(name = "trainee_id")
 	private Trainee trainee;
 
 	@ManyToOne
-	@JoinTable(name = "Trainee", joinColumns = @JoinColumn(name = "id"))
-
+	@JoinColumn(name = "jobopportunity_id")
 	private JobOpportunity jobopportunity;
 
 	private String status;

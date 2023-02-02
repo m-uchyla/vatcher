@@ -2,10 +2,12 @@
 
 
 package com.fmdgroup.vatcher.model;
+import java.util.Date;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,41 +34,63 @@ public class JobOpportunity {
 	private String location;
 	private String duration;
 	private String description;
-	private HashSet<String> skills;
+	@ElementCollection(targetClass=String.class)
+	private Set<String> skills;
 	private boolean active;				//for mapping only active jobopportunities in the controller
-	private LocalDate expirationDate;
-	
-	@ManyToOne
+	private Date expirationDate;
+	@ManyToOne(optional = true)
 	private Trainee trainee;		// this is for retrieving job offers applied 
 									// by the trainee user
 
 	@ManyToMany
+	@ElementCollection(targetClass=Trainee.class)
 	private Set<Trainee> applicants;
 	@OneToMany
+	@ElementCollection(targetClass=Match.class)
 	private Set<Match> matches;
 	@OneToOne
-	@JoinColumn(name = "sales_manager_id")
-	    private SalesManager salesManager;
+	private SalesManager salesManager;
  
 	
 	public JobOpportunity() {}
 
-	public JobOpportunity(String jobTitle, String company, String location, String duration, String description,
-			HashSet<String> skills, Set<Trainee> applicants, Set<Match> matches, LocalDate expirationDate) {
+	public JobOpportunity(String jobTitle, String company, String location, String duration,
+			String description, Set<String> skills) {
 		super();
 		this.jobTitle = jobTitle;
 		this.company = company;
 		this.location = location;
 		this.duration = duration;
 		this.description = description;
-        this.skills = new HashSet<>();
-        this.active	= true;		//kazda nowo dodana bedzie aktywna z automatu
-		this.applicants = applicants;
-		this.matches = matches;
-		this.expirationDate = expirationDate;
-
-	}	
+		this.skills = skills;
+		this.active = true;
+		this.expirationDate = new Date();
+		this.trainee = null;
+		this.applicants = new HashSet<>();
+		this.matches = new HashSet<>();
+		this.salesManager = null;
+	}
 	
+
+	public JobOpportunity(String jobTitle, String company, String location, String duration,
+			String description, HashSet<String> skills, SalesManager salesManager) {
+		super();
+		this.jobTitle = jobTitle;
+		this.company = company;
+		this.location = location;
+		this.duration = duration;
+		this.description = description;
+		this.skills = skills;
+		this.active = true;
+		this.expirationDate = new Date();
+		this.trainee = null;
+		this.applicants = new HashSet<>();
+		this.matches = new HashSet<>();
+		this.salesManager = salesManager;
+	}
+
+
+
 
 	public SalesManager getSalesManager() {
 		return salesManager;
@@ -133,7 +157,7 @@ public class JobOpportunity {
 		this.description = description;
 	}
 
-	public HashSet<String> getSkills() {
+	public Set<String> getSkills() {
 		return skills;
 	}
 
@@ -167,11 +191,11 @@ public void addApplicant(Trainee currentTrainee) {
 	// TODO Auto-generated method stub
 	
 }
-public LocalDate getExpirationDate() {
+public Date getExpirationDate() {
     return expirationDate;
 }
 
-public void setExpirationDate(LocalDate expirationDate) {
+public void setExpirationDate(Date expirationDate) {
     this.expirationDate = expirationDate;
 		}
 

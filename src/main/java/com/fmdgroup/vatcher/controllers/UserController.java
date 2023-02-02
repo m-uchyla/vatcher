@@ -75,6 +75,12 @@ public class UserController {
 		return "reditect:/users";
 	}
 	
+	@PostMapping(value = "/authorize")
+	public String setUserRole(ModelMap model, @RequestParam("code") String code) {
+		//POBIERANIE UŻYTKOWNIKA
+		return "redirect:/users";
+	}
+	
 	@GetMapping("/auth/change-password")
 	public String changePasswordPage(@ModelAttribute("singleUser") SingleUser singleUser) {
 			
