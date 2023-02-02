@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -86,6 +87,14 @@ public class UserController {
 				System.out.println("password does not match");
 			}
 			return "redirect:/auth/login";	
+	}
+	
+	@GetMapping("/account")
+	public String viewDetails(@AuthenticationPrincipal SingleUserDetails loggedUser, Model model) {
+		String email = loggedUser.getUsername();
+		SingleUser user =  (SingleUser) userDetailsService.loadUserByUsername(email);
+		model.addAttribute("user", user);
+		return "redirect:/frontend/profile";
 	}
 
 }
