@@ -18,7 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fmdgroup.vatcher.model.SalesManager;
 import com.fmdgroup.vatcher.model.SingleUser;
+import com.fmdgroup.vatcher.model.Trainee;
+import com.fmdgroup.vatcher.repositories.SalesManagerRepository;
+import com.fmdgroup.vatcher.repositories.TraineeRepository;
 import com.fmdgroup.vatcher.repositories.UserRepository;
 import com.fmdgroup.vatcher.security.SingleUserDetails;
 import com.fmdgroup.vatcher.services.RegistrationService;
@@ -32,13 +36,20 @@ public class UserController {
 	RegistrationService regService;
 	@Autowired
 	SingleUserDetailsService userDetailsService;
+	@Autowired
+	TraineeRepository traineeRepository;
+	@Autowired
+	SalesManagerRepository salesManagerRepository;
 
 	//private final UserRepository userRepository;
 
-	public UserController(UserRepository userRepository, SingleUserDetailsService userDetailsService) {
+	public UserController(UserRepository userRepository, SingleUserDetailsService userDetailsService, 
+			TraineeRepository traineeRepository, SalesManagerRepository salesManagerRepository) {
 		super();
 		this.userRepository = userRepository;
 		this.userDetailsService = userDetailsService;
+		this.traineeRepository = traineeRepository;
+		this.salesManagerRepository = salesManagerRepository;
 	}
 // /users path to the list of users
 	@RequestMapping("/users")
@@ -75,9 +86,20 @@ public class UserController {
 	}
 	
 	@PostMapping(value = "/authorize")
-	public String setUserRole(ModelMap model, @RequestParam("code") String code) {
-		//POBIERANIE UŻYTKOWNIKA
-		return "redirect:/users";
+	public String setUserRole(ModelMap model, @RequestParam("code") int code) {
+		SingleUser user = userDetailsService.findUserFromCurrentSession();
+		user.setRoleByAuthCode(code);
+		userRepository.save(user);
+		if(code == 333) {
+			Trainee trainee = new Trainee(user);
+			traineeRepository.save(trainee);
+			System.out.println("===== "+trainee.toString());
+		}else if(code == 222) {
+			SalesManager salesManager = new SalesManager(user);
+			salesManagerRepository.save(salesManager);
+			System.out.println("===== "+salesManager.toString());
+		}
+		return "redirect:/logout";
 	}
 	
 	@GetMapping("/auth/change-password")

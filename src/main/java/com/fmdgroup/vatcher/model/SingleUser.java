@@ -126,9 +126,13 @@ public boolean equals(Object obj) {
 			&& Objects.equals(password, other.password);
 }
 
+
+
+
 @Override
 public String toString() {
-	return "User [name=" + name + ", email=" + email + ", password=" + password + "]";
+	return "SingleUser [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
+			+ "]";
 }
 
 

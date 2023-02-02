@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.fmdgroup.vatcher.model.Trainee;
 import java.util.Optional;
 import com.fmdgroup.vatcher.model.JobOpportunity;
+import com.fmdgroup.vatcher.model.SingleUser;
 import com.fmdgroup.vatcher.repositories.JobOpportunityRepository;
 import com.fmdgroup.vatcher.services.JobOpportunityService;
+import com.fmdgroup.vatcher.services.SingleUserDetailsService;
 import com.fmdgroup.vatcher.services.TraineeService;
 
 @Controller
@@ -23,14 +25,17 @@ public class JobOpportunityController {
 	private final JobOpportunityRepository jobOpportunityRepository; //create an instance of JobOpportunityRepository 
 	private final JobOpportunityService	service;																//which is used to access the data stored in the 
 	private TraineeService traineeService;
+	private SingleUserDetailsService userDetailsService;
 				
 	//job opportunity repository
 
-	public JobOpportunityController(JobOpportunityRepository jobOpportunityRepository, JobOpportunityService service, TraineeService traineeservice) { //
+	public JobOpportunityController(JobOpportunityRepository jobOpportunityRepository, 
+			JobOpportunityService service, TraineeService traineeservice, SingleUserDetailsService userDetailsService) { //
 		super();
 		this.jobOpportunityRepository = jobOpportunityRepository;
 		this.service = service;
 		this.traineeService = traineeservice;
+		this.userDetailsService = userDetailsService;
 	}
 	
 	@RequestMapping("/jobOpportunity")	//pobieranie //method is responsible for handling requests 
@@ -49,9 +54,9 @@ public class JobOpportunityController {
 
 	@RequestMapping("/activeJobOpportunities")							//to handle HTTP POST requests
 		public String getActiveJobOpportunities(Model model) {
+		model.addAttribute("user",userDetailsService.findUserFromCurrentSession());
 		model.addAttribute("jobOpportunity", jobOpportunityRepository.findByActiveTrue());
-		return "opportunities"; 
-
+		return "opportunities";
 	}
 	
 	//adding jobopportunities for admin:
@@ -142,6 +147,7 @@ public class JobOpportunityController {
 	}
 	
 	@GetMapping("/jobs")
+
     public List<JobOpportunity> getJobs(JobOpportunity filter) {
         return service.getJobs(filter);
         }
@@ -153,6 +159,15 @@ public class JobOpportunityController {
 	
 	
 	
+
+	public String getJobsPage(Model model, JobOpportunity filter) {
+	  List<JobOpportunity> jobs = service.getJobs(filter);
+	  model.addAttribute("jobs", jobs);
+	  return "jobs";
+	}
+	
+
+//>>>>>>> 87f4751b2ee68f47684348f0c340c768e001c13c
 } 
 
 
