@@ -50,7 +50,16 @@ public class JobOpportunityService implements IJobOpportunityService {
 		Optional<JobOpportunity> optJobOpportunity = jobRepository.findById(ID);
 		return optJobOpportunity.orElseThrow(()-> new Exception());
 	}
+
+	public static List<JobOpportunity> findBySalesManager(Long salesManagerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
-	
+	public List<JobOpportunity> getJobs(JobOpportunity filter) {
+        return jobRepository.findByJobTitleContainingAndComapnyContainingAndLocationContainingAndDescriptionContaining(
+                filter.getJobTitle(), filter.getCompany(), filter.getLocation(), filter.getDescription());
+    
+    }
 
 }
