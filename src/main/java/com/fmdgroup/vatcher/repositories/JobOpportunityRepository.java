@@ -13,6 +13,8 @@ public interface JobOpportunityRepository extends JpaRepository<JobOpportunity ,
 			String jobTitle, String company, String location, String duration, String description);
 
 	List<JobOpportunity> findBySalesManager(Long salesManagerId);
+	
+	List<JobOpportunity> findByCompany(String company);
 
 	
  
