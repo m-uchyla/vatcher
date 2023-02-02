@@ -139,7 +139,7 @@ public void setRoleByAuthCode(int authCode) {
 	} else if(authCode==222){
 		this.setRole("ROLE_SALESMANAGER");
 	} else if(authCode==333) {
-		this.setRole("ROLE_USER");
+		this.setRole("ROLE_TRAINEE");
 	}else {
 		this.setRole("ROLE_USER");
 	}
