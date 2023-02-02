@@ -1,7 +1,8 @@
+
 package com.fmdgroup.vatcher.controllers;
 
+import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.fmdgroup.vatcher.model.JobOpportunity;
 import com.fmdgroup.vatcher.model.Trainee;
+import java.util.Optional;
+import com.fmdgroup.vatcher.model.JobOpportunity;
 import com.fmdgroup.vatcher.repositories.JobOpportunityRepository;
 import com.fmdgroup.vatcher.services.JobOpportunityService;
 import com.fmdgroup.vatcher.services.TraineeService;
@@ -21,8 +22,10 @@ import com.fmdgroup.vatcher.services.TraineeService;
 public class JobOpportunityController {
 	private final JobOpportunityRepository jobOpportunityRepository; //create an instance of JobOpportunityRepository 
 	private final JobOpportunityService	service;																//which is used to access the data stored in the 
-	private final TraineeService traineeService; 
-	
+	private TraineeService traineeService;
+				
+	//job opportunity repository
+
 	public JobOpportunityController(JobOpportunityRepository jobOpportunityRepository, JobOpportunityService service, TraineeService traineeservice) { //
 		super();
 		this.jobOpportunityRepository = jobOpportunityRepository;
@@ -77,6 +80,12 @@ public class JobOpportunityController {
 		
 	}
 	
+	
+	@GetMapping("/jobOpportunity/{salesManagerId}")
+	  public List<JobOpportunity> getJobOpportunitiesBySalesManager(@PathVariable Long salesManagerId) {
+	    return JobOpportunityService.findBySalesManager(salesManagerId);
+	  }
+	
 //	method that allows a user with the role of trainee to add themselves to the list 
 //	of users who apply for this position. This function is to be unavailable after the 
 //	recruitment time has expired:
@@ -100,18 +109,24 @@ public class JobOpportunityController {
 	    jobOpportunity.addApplicant(currentTrainee);
 	    jobOpportunityRepository.save(jobOpportunity);
 	    return "redirect:/jobOpportunity/" + jobOpportunityID;
-	}
 	
-	@GetMapping("/jobOpportunity/{salesManagerId}")
-	  public List<JobOpportunity> getJobOpportunitiesBySalesManager(@PathVariable Long salesManagerId) {
-	    return JobOpportunityService.findBySalesManager(salesManagerId);
-	  }
-	
-	 @GetMapping("/jobs")
-	    public List<JobOpportunity> getJobs(JobOpportunity filter) {
-	        return service.getJobs(filter);
-	    
-	}
-
 }
+//allows the sales manager to activate/deactivate the job offer.
+	@PostMapping("/updateJobOpportunityStatus/{id}")
+	public String updateJobOpportunityStatus(@PathVariable Long id, @ModelAttribute JobOpportunity jobOpportunity, Principal principal) {
+	   Optional<JobOpportunity> jobOpportunityOptional = jobOpportunityRepository.findById(id);
+	   if (jobOpportunityOptional.isPresent()) {
+	      JobOpportunity existingJobOpportunity = jobOpportunityOptional.get();
+	      if (principal.getName().equals("SALESMANAGER")) {
+	         existingJobOpportunity.setActive(jobOpportunity.isActive());
+	         jobOpportunityRepository.save(existingJobOpportunity);
+	      } else {
+	         return "Access Denied";
+	      }
+	   }
+	   return "redirect:/jobOpportunity";
+	}
+} 
 
+
+ 

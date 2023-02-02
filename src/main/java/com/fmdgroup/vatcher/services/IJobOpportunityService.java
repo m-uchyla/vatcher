@@ -16,4 +16,11 @@ public interface IJobOpportunityService {
 
 	String getActiveJobOpportunities(Model model) throws Exception;
 
+	List<JobOpportunity> getJobOpportunitiesBySalesManager(Long salesManagerId) throws Exception;
+
+	JobOpportunity activateOrDeactivateJobOpportunity(Long ID, boolean active) throws Exception;
+
+	JobOpportunity deactivateExpiredJobOpportunity(Long ID) throws Exception;
+
 }
+ 
