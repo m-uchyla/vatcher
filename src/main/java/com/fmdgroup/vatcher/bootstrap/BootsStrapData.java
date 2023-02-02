@@ -46,15 +46,28 @@ public class BootsStrapData implements CommandLineRunner {
 		userRepository.save(user1);
 		userRepository.save(user2);
 		
+		Set<String> testQualifications = new HashSet<String>();
+		testQualifications.add("Welder");
+		testQualifications.add("Soldier");
+		testQualifications.add("Cook");
+		testQualifications.add("Java Developer");
+		testQualifications.add("Nanny");
+		
+		Set<String> testJobPref = new HashSet<String>();
+		testJobPref.add("Soldier");
+		testJobPref.add("Welder");
+		testJobPref.add("Java Developer");
+				
 		Trainee trainee = new Trainee(user2);
-		
+		trainee.setQualifications(testQualifications);
+		trainee.setJobsPreferences(testJobPref);
 		traineeRepository.save(trainee);
-		
+			
 		System.out.println("Number of users: "+userRepository.count());
 		
 		Notifications not1 = new Notifications("You have a notification.", user1, new Date() , false);
-	
 		notificationsRepository.save(not1);
+		
 		Set<String> skillSet = new HashSet<>();
 		
 		 JobOpportunity jobOpportunity1 = new JobOpportunity(
@@ -109,7 +122,8 @@ public class BootsStrapData implements CommandLineRunner {
 	 jobOpportunityRepository.save(jobOpportunity4);
 	 jobOpportunityRepository.save(jobOpportunity5);
 	
-	
+
+	 
 	}
 	
 	

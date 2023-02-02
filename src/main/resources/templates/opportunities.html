@@ -46,20 +46,19 @@
 	</div>
 	<div class="profile">
 		<div class="card userProfile">
-			 <h1>User name</h1>
+		<div class="desc">
+			 <h1 th:text="${user.name}">User name</h1>
 			 <h3>Qualifications</h3>
-			 <p>This</p>
-			 <p>is</p>
-			 <p>qualifications</p>
-			 <p>list</p>
-			 <h3>Job preferences</h3>
-			 <p>This</p>
-			 <p>is</p>
-			 <p>preferences</p>
-			 <p>list</p>
+			 <ul th:each="qualification : ${trainee.qualifications}">
+  				<li th:text="${qualification}">Coffee</li>
+			 </ul>
+			  <h3>Job preferences</h3>
+			 <ul th:each="jobPreference : ${trainee.jobsPreferences}">
+  				<li th:text="${jobPreference}">Coffee</li>
+			 </ul>
+		</div>
 		</div>
 	</div>
-</div>
 
 <footer>
 	<p>VATCHER 2023</p>

@@ -59,7 +59,8 @@ public class JobOpportunityController {
 		public String getActiveJobOpportunities(Model model) {
 		model.addAttribute("user",userDetailsService.findUserFromCurrentSession());
 		model.addAttribute("jobOpportunity", jobOpportunityRepository.findByActiveTrue());
-		model.addAttribute("trainee", traineeRepository.findByUser(userDetailsService.findUserFromCurrentSession()));
+		model.addAttribute("trainee", traineeRepository.findByUser(userDetailsService.findUserFromCurrentSession()).get());
+//		System.out.println("Ala ma kota:"+traineeRepository.findByUser(userDetailsService.findUserFromCurrentSession()).toString());
 		return "opportunities";
 	}
 	
