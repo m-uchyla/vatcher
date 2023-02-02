@@ -53,6 +53,11 @@ public class JobOpportunityService implements IJobOpportunityService {
 		Optional<JobOpportunity> optJobOpportunity = jobRepository.findById(ID);
 		return optJobOpportunity.orElseThrow(()-> new Exception());
 	}
+
+	public List<JobOpportunity> getJobs(JobOpportunity filter) {
+        return jobRepository.findByJobTitleContainingAndComapnyContainingAndLocationContainingAndDescriptionContaining(
+                filter.getJobTitle(), filter.getCompany(), filter.getLocation(), filter.getDescription());
+    }
 	
 	@Override
 	public List<JobOpportunity> getJobOpportunitiesBySalesManager(Long salesManagerId) throws Exception {
