@@ -54,7 +54,17 @@ public TraineeService(JobOpportunityService jobOpportunityService) {
 //			
 //	}
 	
-	
+	//adds a specific job offer (as an object) to the trainee's offer list
+	@Override
+	public void addJobOpportunity(Long traineeId, Long jobId) throws Exception {
+		Trainee trainee = findTraineeById(traineeId);									//retrieve a trainee objcet with the findTraineeById method and store the result in the variable 'trainee'
+	    JobOpportunity job = jobOpportunityService.findJobOpportunityByID(jobId);		//retrieve jobopp object by calling the method findjobopportunitybyid from a jobopportunityservice objcet with the input jobId and store the result in the variable 'job'
+	    Set<JobOpportunity> jobOpportunities = trainee.getJobOpportunities();			//get set of jobopp assosiated with the trainee object calling the method getjobopportunities and store it in the variable jobopportunities
+	    jobOpportunities.add(job);														//add job objcect to the jobopportunities set
+	    traineeRepo.save(trainee);														//save the updated trainee object by method save on a traineerepo object and passing in the trainee object as an argument
+	}
+
+
 	
 	// this is for retrieving job offers applied by the trainee user:
 	@Override				
