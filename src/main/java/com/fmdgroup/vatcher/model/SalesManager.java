@@ -24,15 +24,18 @@ public class SalesManager {
 		@OneToOne
 	    private SingleUser user;		//mapped by was deleted and it works IDK why xD
 		
-		private String name;
 		
 		public SalesManager() {}
 		
-		public SalesManager(List <JobOpportunity> jobOpportunities, String name) {
+		public SalesManager(SingleUser user) {
+			super();
+			this.user = user;
+		}
+		
+		public SalesManager(List <JobOpportunity> jobOpportunities, SingleUser user) {
 			super();
 			this.jobOpportunities = jobOpportunities;
-			this.name = name;
-			
+			this.user = user;
 		}
 		
 		
@@ -42,14 +45,6 @@ public class SalesManager {
 
 		public void setJobopportunities(List<JobOpportunity> jobOpportunities) {
 			this.jobOpportunities = jobOpportunities;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
 		}
 		
 		public void setUser(SingleUser user) {		
@@ -75,7 +70,9 @@ public class SalesManager {
 
 		@Override
 		public String toString() {
-			return "Sales Manager [id=" + id + ", Name=" + name + ", Jobopportunities=" + "]";
+			return "SalesManager [id=" + id + ", jobOpportunities=" + jobOpportunities + ", user=" + user + "]";
 		}
+
+		
 		
 	}

@@ -43,6 +43,11 @@ public class Trainee {
 
 	public Trainee() {}
 	
+	public Trainee(SingleUser user) {
+		super();
+		this.user = user;
+	}
+	
 	public Trainee(Set<String> qualifications, Set<String> jobsPreferences, SingleUser user) {
 		super();
 		this.qualifications = qualifications;
