@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -16,13 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fmdgroup.vatcher.model.SingleUser;
 import com.fmdgroup.vatcher.repositories.UserRepository;
-import com.fmdgroup.vatcher.security.SingleUserDetails;
 import com.fmdgroup.vatcher.services.RegistrationService;
-import com.fmdgroup.vatcher.services.SingleUserDetailsService;
 
 @Controller
 public class UserController {
@@ -30,15 +25,12 @@ public class UserController {
 	private UserRepository userRepository;
 	@Autowired
 	RegistrationService regService;
-	@Autowired
-	SingleUserDetailsService userDetailsService;
 
 	//private final UserRepository userRepository;
 
-	public UserController(UserRepository userRepository, SingleUserDetailsService userDetailsService) {
+	public UserController(UserRepository userRepository) {
 		super();
 		this.userRepository = userRepository;
-		this.userDetailsService = userDetailsService;
 	}
 // /users path to the list of users
 	@RequestMapping("/users")
@@ -66,35 +58,10 @@ public class UserController {
 	@RequestMapping("/admin")
 	public String testAdminRole(){return "admin";}
 	
-	@GetMapping("/auth/change-password")
-	public String changePasswordPage(@ModelAttribute("singleUser") SingleUser singleUser) {
-			
-			return "auth/changePassword";
-		}
-		
-	@PostMapping("/auth/change-password")
-	public String changePassword(@RequestParam("email") String email,@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword) {
-			Integer hashedOldPassword = oldPassword.hashCode();
-			String hashedOldPasswordString = hashedOldPassword.toString();
-			UserDetails singleUserDetails = userDetailsService.loadUserByEmailForPasswordChange(email);
-			SingleUserDetails singleUserDetails1 = (SingleUserDetails) singleUserDetails;
-			if(singleUserDetails.getPassword().equals(hashedOldPasswordString)) {
-			    singleUserDetails1.setPassword(newPassword);
-			    singleUserDetails = (UserDetails) singleUserDetails1;
-			    userDetailsService.saveUserToDb(singleUserDetails1);
-			    
-			}else {
-				System.out.println("password does not match");
-			}
-			return "redirect:/auth/login";	
-	}
-	
-	@GetMapping("/account")
-	public String viewDetails(@AuthenticationPrincipal SingleUserDetails loggedUser, Model model) {
-		String email = loggedUser.getUsername();
-		SingleUser user =  (SingleUser) userDetailsService.loadUserByUsername(email);
-		model.addAttribute("user", user);
-		return "redirect:/frontend/profile";
+	@RequestMapping("/test")
+	public String testAuthenticatedUser(Authentication authentication, Model model){
+		model.addAttribute("username", authentication.getName());
+		return "admin";
 	}
 
 }

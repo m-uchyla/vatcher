@@ -19,6 +19,7 @@ public class ChatController {
 	@GetMapping("/chat")		//maps to the chat page and returns all messages in the chat. adds all messages
 								// to the model and returns the chat view
 	public String chat(Model model) {
+		List<Chat> messages = new ArrayList<>();
 		model.addAttribute("messages", messages);
 		return "chat";
 	}	
@@ -43,7 +44,6 @@ public class ChatController {
 											//it adds the filtered messages to the model and returns the chat view
 	public String postMessage(@RequestParam("sender") String sender, @RequestParam("content") String content, @RequestParam("opportunityID") String opportunityID, Model model) {
 		messages.add(new Chat(sender, content, opportunityID));
-		System.out.println(messages);
 		return "redirect:/chat";
 	
 	}
