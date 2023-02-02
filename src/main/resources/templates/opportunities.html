@@ -25,9 +25,18 @@
 	<div class="feed">
 		<div class="card opportunity" th:each="job : ${jobOpportunity}">
 			<div class="desc">
-				 <h1 th:text="${job.jobTitle}">Opportunity 1</h1>
-				 <p th:text="${job.company}">This is a paragraph.</p>
-				 <p th:text="${job.location}">This is another paragraph.</p>
+			
+				<h1 th:text="${job.jobTitle}">Opportunity 1</h1>
+				<p><strong>Company:</strong> <span th:text="${job.company}">Company</span></p>
+				 <p><strong>Location</strong>: <span th:text="${job.location}">Location</span></p>
+				 <p><strong>Duration:</strong> <span th:text="${job.duration}">Duration</span></p>
+				 <p><strong>Description:</strong> <span th:text="${job.description}">Description</span></p>
+				 <p><strong>Skills:</strong> <span th:text="${job.skills}">Skills</span></p>
+				  <p><strong>Status:</strong> <span th:text="${job.active ? 'Active' : 'Inactive'}">Status</span></p>
+				   <p><strong>Expiration Date:</strong> <span th:text="${job.expirationDate}">Expiration Date</span></p>
+				  
+				  
+				 
 			 </div>
 			 <div class= "action">
 				 <i class="fa fa-heart heart" style="font-size:4rem;" aria-hidden="true"></i>
@@ -38,12 +47,12 @@
 	<div class="profile">
 		<div class="card userProfile">
 			 <h1>User name</h1>
-			 <h3>Qualifications</h2>
+			 <h3>Qualifications</h3>
 			 <p>This</p>
 			 <p>is</p>
 			 <p>qualifications</p>
 			 <p>list</p>
-			 <h3>Job preferences</h2>
+			 <h3>Job preferences</h3>
 			 <p>This</p>
 			 <p>is</p>
 			 <p>preferences</p>
