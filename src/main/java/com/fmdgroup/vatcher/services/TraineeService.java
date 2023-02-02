@@ -30,10 +30,32 @@ public TraineeService(JobOpportunityService jobOpportunityService) {
 	
 }
 
+//
+//	@Override
+//	public Trainee findTraineeByUsername(String username) throws Exception {
+//    Optional<Trainee> optionalTrainee = Optional.ofNullable(traineeRepo.findByUsername(username));
+//    return optionalTrainee.orElse(null);
+//}
+		
+//	implementation of the method findTraineeByUsername. takes a username
+//	as input and returns a Trainee object. The method first fetches the Trainee object from 
+//	the traineeRepo by calling the method findByUsername with the input username. This method 
+//	returns an Optional<Trainee> object, which may contain a value of type Trainee or may be empty.
+//
+//	The method orElse(null) is called on the Optional<Trainee> object. It returns the value 
+//	contained in the Optional if it is present, otherwise returns the specified default value
+//	(in this case, null). So, if the Optional contains a Trainee object, it is returned, otherwise,
+//	null is returned.
+	
+	
+	
 //	@Override
 //	public Set<String> traineeQualification(Long id) {
 //			
 //	}
+	
+	
+	
 	// this is for retrieving job offers applied by the trainee user:
 	@Override				
 	public Set<JobOpportunity> getJobOpportunities(Long traineeId) throws Exception {
@@ -99,6 +121,17 @@ public TraineeService(JobOpportunityService jobOpportunityService) {
 	public void deleteTrainee(Long id) throws Exception {
 		traineeRepo.delete(findTraineeById(id));
 		
+	}
+
+
+	public Trainee getCurrentTrainee() {
+		return null;
+	}
+
+	@Override
+	public Trainee findTraineeByUsername(String username) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
