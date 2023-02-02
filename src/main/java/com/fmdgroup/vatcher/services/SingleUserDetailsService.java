@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
 
 import com.fmdgroup.vatcher.model.SingleUser;
 import com.fmdgroup.vatcher.repositories.UserRepository;
@@ -65,5 +67,9 @@ public class SingleUserDetailsService implements UserDetailsService{
 	public void saveUserToDb(SingleUserDetails singlUsDet) {
 		userRepository.save(singlUsDet.getSingleUser());
 	}
+	
+
+	
+	
 
 }
