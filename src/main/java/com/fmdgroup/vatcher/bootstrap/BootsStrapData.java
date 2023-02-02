@@ -5,8 +5,10 @@ import java.util.Date;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import com.fmdgroup.vatcher.model.JobOpportunity;
 import com.fmdgroup.vatcher.model.Notifications;
 import com.fmdgroup.vatcher.model.SingleUser;
+import com.fmdgroup.vatcher.repositories.JobOpportunityRepository;
 import com.fmdgroup.vatcher.repositories.NotificationsRepository;
 import com.fmdgroup.vatcher.repositories.UserRepository;
 
@@ -15,11 +17,13 @@ public class BootsStrapData implements CommandLineRunner {
 	
 	private final UserRepository userRepository;
 	private final NotificationsRepository notificationsRepository;
+	private final JobOpportunityRepository jobOpportunityRepository;
 
-	public BootsStrapData(UserRepository userRepository, NotificationsRepository notificationsRepository) {
+	public BootsStrapData(UserRepository userRepository, NotificationsRepository notificationsRepository, JobOpportunityRepository jobOpportunitesRepository) {
 		super();
 		this.userRepository = userRepository;
 		this.notificationsRepository = notificationsRepository;
+		this.jobOpportunityRepository = jobOpportunitesRepository;
 	}
 
 	
@@ -40,5 +44,26 @@ public class BootsStrapData implements CommandLineRunner {
 
 	notificationsRepository.save(not1);
 	
+	
 	}
+	 
+	public void run1(String... args) throws Exception {
+		 
+		 JobOpportunity jobOpportunity1 = new JobOpportunity("Software Enginner", "Shell", "Warsaw", "Office");
+		 JobOpportunity jobOpportunity2 = new JobOpportunity("Data Enginner", "HSBC", "Wroclaw", "Remote");
+		 JobOpportunity jobOpportunity3 = new JobOpportunity("Software Developer", "Google", "New York", "Office");
+		 JobOpportunity jobOpportunity4 = new JobOpportunity("Software tester", "Amazon", "Warsaw", "Remote");
+		 JobOpportunity jobOpportunity5 = new JobOpportunity("Software Developer", "Facebook", "Frankfurt", "Office");
+		 
+		 jobOpportunityRepository.save(jobOpportunity1);
+		 jobOpportunityRepository.save(jobOpportunity2);
+		 jobOpportunityRepository.save(jobOpportunity3);
+		 jobOpportunityRepository.save(jobOpportunity4);
+		 jobOpportunityRepository.save(jobOpportunity5);
+		 
+
+		}
+	
+	
+	
 }

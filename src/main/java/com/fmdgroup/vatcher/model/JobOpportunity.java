@@ -39,7 +39,7 @@ public class JobOpportunity {
 	private Set<Match> matches;
  
 	
-	public JobOpportunity() {}
+	public JobOpportunity(String string, String string2, String string3, String string4) {}
 
 	public JobOpportunity(String jobTitle, String company, String location, String duration, String description,
 			HashSet<String> skills, Set<Trainee> applicants, Set<Match> matches) {
