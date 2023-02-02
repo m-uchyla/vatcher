@@ -40,10 +40,10 @@ public class UserController {
 		this.userDetailsService = userDetailsService;
 	}
 // /users path to the list of users
-	@RequestMapping("/users")
+	@GetMapping("/users")
 	public String getUsers(Model model) {
-		model.addAttribute("users", userRepository.findAll());
-		return "singleUser";
+		model.addAttribute("users", userDetailsService.getAllUsers());
+		return "redirect:/users";
 		// singleUser is a view, it is name of html file that makes view.
 	}
 //GetMapping allows user to open a website with places with input a data. 
