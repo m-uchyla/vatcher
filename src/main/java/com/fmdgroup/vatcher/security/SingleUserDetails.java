@@ -30,11 +30,19 @@ public class SingleUserDetails implements UserDetails{
 		System.out.println("Single user details / getPassword");
 		return this.singleUser.getPassword();
 	}
+	
+	public void setPassword(String password) {
+        this.singleUser.setPassword(password);
+    }
 
 	@Override
 	public String getUsername() {
 		
 		return this.singleUser.getName();
+	}
+	
+	public String getEmail() {
+		return this.singleUser.getEmail();
 	}
 
 	@Override

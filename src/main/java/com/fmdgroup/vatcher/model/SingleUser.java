@@ -98,7 +98,6 @@ public void setEmail(String email) {
 }
 
 public String getPassword() {
-	System.out.println("Single user Class cionstructor");
 	return this.password;
 }
 

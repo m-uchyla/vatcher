@@ -32,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 		.antMatchers("/admin").hasRole("ADMIN")
 		.antMatchers("/auth/login", "/auth/registration", "/error").permitAll()
+		.antMatchers("/auth/login", "/auth/registration", "/error", "/auth/change-password").permitAll()
 		.anyRequest().hasAnyRole("USER","ADMIN")
 		.and()
 		.formLogin().loginPage("/auth/login")
@@ -48,7 +49,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	// setting the authentication
 	protected void configure(AuthenticationManagerBuilder auth) {
-		System.out.println("Confidure / SecurityConfig");
 		auth.authenticationProvider(authProvider);
 
 }
