@@ -34,13 +34,14 @@
 				 <p><strong>Skills:</strong> <span th:text="${job.skills}">Skills</span></p>
 				  <p><strong>Status:</strong> <span th:text="${job.active ? 'Active' : 'Inactive'}">Status</span></p>
 				   <p><strong>Expiration Date:</strong> <span th:text="${job.expirationDate}">Expiration Date</span></p>
+				   <p th:text="${job.getJob_id()}"></p>
 				  
 				  
 				 
 			 </div>
 			 <div class= "action">
 				 <i class="fa fa-heart heart" style="font-size:4rem;" aria-hidden="true"></i>
-				 <i class="fa fa-times cross" style="font-size:5rem;" aria-hidden="true"></i>
+				<a th:href="@{/chat/(id=${job.getJob_id()})}" class="fa fa-comment cross" style="font-size:4rem;" aria-hidden="true"></a>
 			 </div>
 		</div>
 	</div>
@@ -59,7 +60,7 @@
 		</div>
 		</div>
 	</div>
-
+</div>
 <footer>
 	<p>VATCHER 2023</p>
 </footer>

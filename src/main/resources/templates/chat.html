@@ -8,15 +8,15 @@
   </head>
   <body>
     <h1>Chat Page</h1>
+    <h3 th:text="${user.name}">User name</h3>
     <form th:action="@{/chat/opportunity}" method="post">
       <input type="hidden" name="opportunityID" th:value="${opportunityID}" />
-      <input type="text" name="sender" placeholder="Your name" required />
       <input type="text" name="content" placeholder="Type your message" required />
       <button type="submit">Send</button>
     </form>
     <hr />
     <div th:each="message : ${messages}">
-      <p><strong th:text="${message.sender}">Sender</strong>: <span th:text="${message.content}">Content</span></p>
+      <p><strong th:text="${message.sender.name}">Sender</strong>: <span th:text="${message.content}">Content</span></p>
     </div>
   </body>
 </html>
