@@ -133,8 +133,13 @@ public class JobOpportunityController {
 	}
 	
 	@GetMapping("/jobs")
-    public List<JobOpportunity> getJobs(JobOpportunity filter) {
-        return service.getJobs(filter);}
+	public String getJobsPage(Model model, JobOpportunity filter) {
+	  List<JobOpportunity> jobs = service.getJobs(filter);
+	  model.addAttribute("jobs", jobs);
+	  return "jobs";
+	}
+	
+
 } 
 
 
