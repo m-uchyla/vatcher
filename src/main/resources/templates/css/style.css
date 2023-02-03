@@ -182,7 +182,6 @@ hr{
 	height: -webkit-fill-available;
 	min-height: 50ex;
 	
-	
 }
 
 .opportunity i{
@@ -258,6 +257,12 @@ hr{
 	display:flex;
 	flex-direction: column;
 
+}
+
+.notificationsList{
+	display:flex;
+	flex-direction: column;
+	text-align: center;
 }
 
 .list p{

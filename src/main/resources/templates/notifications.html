@@ -2,10 +2,28 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Notifications</title>
+<title>Vatcher - Opportunities</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet"
+	href="https:/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 <body>
+	<nav>
+		<h1>VATCHER</h1>
+		<ul>
+			<li><a>Home</a></li>
+			<li><a>Opportunities</a></li>
+			<li><a>Profile</a></li>
+			<li><a th:href="@{/logout}">Logout</a></li>
+			<li><a class="fa fa-bell" aria-hidden="true"></a></li>
+		</ul>
+	</nav>
+	<div class="feed">
+			<div class="card opportunity" style="margin-left: 5rem">
+				<div class="list">
 <h1>Notifications table</h1>
+	<div class="notificationsList">
 		<table>
 			<tr>
 				<th>ID</th>
@@ -24,5 +42,12 @@
 				<td th:text="${notification.read}"></td>
 			</tr>
 		</table>
+		</div>
+	</div>
+	</div>
+	</div>
+	<footer>
+		<p>VATCHER 2023</p>
+	</footer>
 </body>
 </html>
