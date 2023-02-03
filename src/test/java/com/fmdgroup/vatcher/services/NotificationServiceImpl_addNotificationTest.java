@@ -1,34 +1,37 @@
 package com.fmdgroup.vatcher.services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.fmdgroup.vatcher.controllers.NotificationsController;
 import com.fmdgroup.vatcher.model.Notifications;
-import com.fmdgroup.vatcher.repositories.NotificationsRepository;
 
-@RunWith(SpringRunner.class)
-
+@ExtendWith(MockitoExtension.class)
 public class NotificationServiceImpl_addNotificationTest {
-
-    @Autowired
+    @Mock
     private NotificationServiceImpl notificationServiceImpl;
-    private NotificationsRepository notificationsRepository;
+    @InjectMocks
+    private NotificationsController notificationsController;
 
+    private MockMvc mockMvc;
+    
     @Test
-    public void testAddNotification() {
-      Notifications notification = new Notifications();
-      
-      // set properties of the notification object
-      String newNotifications = notificationServiceImpl.addNotification(notification);
-      assertEquals("notifications", newNotifications);
-      String savedNotifications = notificationServiceImpl;
-      
-      // additional assertions to verify that the notification was saved correctly
-      assertEquals(notification, savedNotifications);
-
+    public void addNotificationTest() throws Exception {
+        Notifications notification = new Notifications();
+        mockMvc = MockMvcBuilders.standaloneSetup(notificationsController).build();
+        mockMvc.perform(post("/notifications")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{}"))
+                .andExpect(status().isOk());
+        verify(notificationServiceImpl).addNotification(notification);
     }
 }
