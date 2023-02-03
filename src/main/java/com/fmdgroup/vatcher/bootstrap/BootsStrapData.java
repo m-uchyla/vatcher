@@ -65,8 +65,8 @@ public class BootsStrapData implements CommandLineRunner {
 			
 		System.out.println("Number of users: "+userRepository.count());
 		
-		Notifications not1 = new Notifications("You have a notification.", user1, new Date() , false);
-		notificationsRepository.save(not1);
+//		Notifications not1 = new Notifications("You have a notification.", user1, new Date() , false);
+//		notificationsRepository.save(not1);
 		
 		Set<String> skillSet = new HashSet<>();
 		skillSet.add("Java");
