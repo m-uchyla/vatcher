@@ -69,6 +69,10 @@ public class BootsStrapData implements CommandLineRunner {
 		notificationsRepository.save(not1);
 		
 		Set<String> skillSet = new HashSet<>();
+		skillSet.add("Java");
+		skillSet.add("SQL");
+		skillSet.add("Python");
+		skillSet.add("English");
 		
 		 JobOpportunity jobOpportunity1 = new JobOpportunity(
 				 "Software Enginner", 
