@@ -198,11 +198,13 @@ hr{
 	display:flex;
 	flex-direction: column;
 	justify-content:space-evenly;
+	
 }
 
 .heart{
 	cursor:pointer;
 	color: #27474e;
+	
 }
 
 .heart:hover{

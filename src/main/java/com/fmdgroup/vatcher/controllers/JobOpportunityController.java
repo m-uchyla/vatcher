@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.fmdgroup.vatcher.model.Trainee;
 import java.util.Optional;
 import com.fmdgroup.vatcher.model.JobOpportunity;
@@ -104,34 +106,32 @@ public class JobOpportunityController {
 	
 	// /// nie sprawdzane vlad
 	@PostMapping("/applyJobOpportunity/{id}")
-	public String applyForJobOpportunity(@PathVariable("id") Long jobOpportunityID, @PathVariable("id") Long traineeId) {
+	public String applyForJobOpportunity(@PathVariable("id") Long jobOpportunityID, @RequestParam("traineeId") Long traineeId) {
 	    Optional<JobOpportunity> jobOpportunityOptional = jobOpportunityRepository.findById(jobOpportunityID);
 	    Optional<Trainee> traineeOptional = traineeRepository.findById(traineeId);
+
+	    if (!traineeOptional.isPresent()) {
+	        return "error";
+	    }
+	    if (!jobOpportunityOptional.isPresent()) {
+	        return "error";
+	    }
+
 	    JobOpportunity jobOpportunity = jobOpportunityOptional.get();
 	    Trainee trainee= traineeOptional.get();
 	    
-	    if (!traineeOptional.isPresent()) {
-		       // model.addAttribute("errorMessage", "Job opportunity not found.");
-		        return "error";
-		    }
-	    if (!jobOpportunityOptional.isPresent()) {
-	       // model.addAttribute("errorMessage", "Job opportunity not found.");
+	    if (jobOpportunity.isExpired()) {
 	        return "error";
 	    }
 	    
-	    if (jobOpportunity.isExpired()) {
-	        //model.addAttribute("errorMessage", "Recruitment time has expired.");
-	        return "error";
-	    }
 	    jobOpportunity.getApplicants().add(trainee);
 	    trainee.getJobOpportunities().add(jobOpportunity);
-	    
+	    System.out.println("Job opportunity has been added");
+	    System.out.println(jobOpportunity);
 	    traineeRepository.save(trainee);
 	    jobOpportunityRepository.save(jobOpportunity);
 	    
-	    return "/jobs";
-	    
-	    
+	    return "redirect:/opportunities";
 	}
 	
 	

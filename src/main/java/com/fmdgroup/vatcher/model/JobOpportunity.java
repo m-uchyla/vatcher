@@ -20,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Indexed;
+
 @Entity
 @Table(name="Job_Opportunities")
 @NamedQuery(name = "getAllJobs", query = "SELECT j FROM JobOpportunity j")
@@ -43,7 +45,7 @@ public class JobOpportunity {
 									// by the trainee user
 
 	@ManyToMany
-	@ElementCollection(targetClass=Trainee.class)
+	//@ElementCollection(targetClass=Trainee.class)
 	private Set<Trainee> applicants;
 	@OneToMany
 	@ElementCollection(targetClass=Match.class)
@@ -198,6 +200,14 @@ public Date getExpirationDate() {
 public void setExpirationDate(Date expirationDate) {
     this.expirationDate = expirationDate;
 		}
+
+@Override
+public String toString() {
+	return "JobOpportunity [id=" + id + ", jobTitle=" + jobTitle + ", company=" + company + ", location=" + location
+			+ ", duration=" + duration + ", description=" + description + ", skills=" + skills + ", active=" + active
+			+ ", expirationDate=" + expirationDate + ", trainee=" + trainee + ", applicants=" + applicants
+			+ ", matches=" + matches + ", salesManager=" + salesManager + "]";
+}
 
 }
 
