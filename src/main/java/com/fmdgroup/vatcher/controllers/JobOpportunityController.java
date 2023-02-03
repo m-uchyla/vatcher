@@ -71,6 +71,15 @@ public class JobOpportunityController {
 		return "opportunities";
 	}
 	
+	@RequestMapping("/opportunities")		
+	public String getNotAppliedJobOpportunities(Model model) {
+	Trainee trainee = traineeRepository.findByUser(userDetailsService.findUserFromCurrentSession()).get();
+	model.addAttribute("user",userDetailsService.findUserFromCurrentSession());
+	model.addAttribute("jobOpportunity", traineeService.getNotAppliedJobOpportunities(trainee));
+	model.addAttribute("trainee", trainee);
+	return "opportunities";
+}
+	
 	//adding jobopportunities for admin:
 ////	@PreAuthorize("hasRole('Admin')")		// so olny admin can do it (needs to be added to pom file)
 	

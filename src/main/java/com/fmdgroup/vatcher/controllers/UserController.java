@@ -82,7 +82,7 @@ public class UserController {
 	@RequestMapping("/authorize")
 	public String goTosetUserRole(Authentication authentication){
 		if(userDetailsService.findUserFromCurrentSession().getRole().contains("USER"))return "auth/guest";
-		return "redirect:/users";
+		return "redirect:/opportunities";
 	}
 	
 	@PostMapping(value = "/authorize")
