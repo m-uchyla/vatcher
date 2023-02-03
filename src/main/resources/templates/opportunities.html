@@ -70,15 +70,6 @@
   </div>
 </form>
 
-<script>
-  function submitForm(event) {
-    event.preventDefault();
-    var form = event.target.form;
-    var xhr = new XMLHttpRequest();
-    xhr.open(form.method, form.action, true);
-    xhr.send(new FormData(form));
-  }
-</script> 
 					<a
 						th:href="@{/chat/(id=${job.getJob_id()})}"
 						class="fa fa-comment cross" style="font-size: 4rem;"
