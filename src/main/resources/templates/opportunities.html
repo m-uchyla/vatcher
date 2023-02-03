@@ -1,73 +1,92 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Vatcher - Opportunities</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" th:href="@{/css/style.css}" />
-<link
-      rel="stylesheet"
-      href="https:/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+<link rel="stylesheet"
+	href="https:/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 <body>
-<nav>
-	<h1>VATCHER</h1>
-	<ul>
-		<li><a>Home</a></li>
-		<li><a>Opportunities</a></li>
-        <li><a>Profile</a></li>
-        <li><a>Logout</a></li>
-        <li><a class="fa fa-bell" aria-hidden="true"></a></li>
-      </ul>
-</nav>
-<div class=mainGrid>
-	<div class="feed">
-		<div class="card opportunity" th:each="job : ${jobOpportunity}">
-			<div class="desc">
-			
-				<h1 th:text="${job.jobTitle}">Opportunity 1</h1>
-				<p><strong>Company:</strong> <span th:text="${job.company}">Company</span></p>
-				 <p><strong>Location</strong>: <span th:text="${job.location}">Location</span></p>
-				 <p><strong>Duration:</strong> <span th:text="${job.duration}">Duration</span></p>
-				 <p><strong>Description:</strong> <span th:text="${job.description}">Description</span></p>
-				 <p><strong>Skills:</strong> 
-<span th:each="skill,iterStat : ${job.skills}">
-  <span th:text="${skill}"/></span>
-  <span th:if="!iterStat.last">, </span>
-</span>
-</p>
-				  <p><strong>Status:</strong> <span th:text="${job.active ? 'Active' : 'Inactive'}">Status</span></p>
-				   <p><strong>Expiration Date:</strong> <span th:text="${job.expirationDate}">Expiration Date</span></p>
-				   <p th:text="${job.getJob_id()}"></p>
-				  
-				  
-				 
-			 </div>
-			 <div class= "action">
-				 <i class="fa fa-heart heart" style="font-size:4rem;" aria-hidden="true"></i>
-				<a th:href="@{/chat/(id=${job.getJob_id()})}" class="fa fa-comment cross" style="font-size:4rem;" aria-hidden="true"></a>
-			 </div>
+	<nav>
+		<h1>VATCHER</h1>
+		<ul>
+			<li><a>Home</a></li>
+			<li><a>Opportunities</a></li>
+			<li><a>Profile</a></li>
+			<li><a>Logout</a></li>
+			<li><a class="fa fa-bell" aria-hidden="true"></a></li>
+		</ul>
+	</nav>
+	<div class=mainGrid>
+		<div class="feed">
+			<div class="card opportunity" th:each="job : ${jobOpportunity}">
+				<div class="desc">
+
+					<h1 th:text="${job.jobTitle}">Opportunity 1</h1>
+					<p>
+						<strong>Company:</strong> <span th:text="${job.company}">Company</span>
+					</p>
+					<p>
+						<strong>Location</strong>: <span th:text="${job.location}">Location</span>
+					</p>
+					<p>
+						<strong>Duration:</strong> <span th:text="${job.duration}">Duration</span>
+					</p>
+					<p>
+						<strong>Description:</strong> <span th:text="${job.description}">Description</span>
+					</p>
+					<p>
+						<strong>Skills:</strong> <span
+							th:each="skill,iterStat : ${job.skills}"> <span
+							th:text="${skill}" /></span> <span th:if="!iterStat.last">, </span>
+						</span>
+					</p>
+					<p>
+						<strong>Status:</strong> <span
+							th:text="${job.active ? 'Active' : 'Inactive'}">Status</span>
+					</p>
+					<p>
+						<strong>Expiration Date:</strong> <span
+							th:text="${#dates.format(job.expirationDate, 'yyyy-MM-dd HH:mm:ss')}">Expiration
+							Date</span>
+					<p>
+						<strong>Id:</strong> <span th:text="${job.getJob_id()}">Identity
+							number</span>
+					</p>
+
+
+
+
+				</div>
+				<div class="action">
+					<i class="fa fa-heart heart" style="font-size: 4rem;"
+						aria-hidden="true"></i> <a
+						th:href="@{/chat/(id=${job.getJob_id()})}"
+						class="fa fa-comment cross" style="font-size: 4rem;"
+						aria-hidden="true"></a>
+				</div>
+			</div>
+		</div>
+		<div class="profile">
+			<div class="card userProfile">
+				<div class="desc">
+					<h1 th:text="${user.name}">User name</h1>
+					<h3>Qualifications</h3>
+					<ul th:each="qualification : ${trainee.qualifications}">
+						<li th:text="${qualification}">Coffee</li>
+					</ul>
+					<h3>Job preferences</h3>
+					<ul th:each="jobPreference : ${trainee.jobsPreferences}">
+						<li th:text="${jobPreference}">Coffee</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="profile">
-		<div class="card userProfile">
-		<div class="desc">
-			 <h1 th:text="${user.name}">User name</h1>
-			 <h3>Qualifications</h3>
-			 <ul th:each="qualification : ${trainee.qualifications}">
-  				<li th:text="${qualification}">Coffee</li>
-			 </ul>
-			  <h3>Job preferences</h3>
-			 <ul th:each="jobPreference : ${trainee.jobsPreferences}">
-  				<li th:text="${jobPreference}">Coffee</li>
-			 </ul>
-		</div>
-		</div>
-	</div>
-</div>
-<footer>
-	<p>VATCHER 2023</p>
-</footer>
+	<footer>
+		<p>VATCHER 2023</p>
+	</footer>
 </body>
 </html>
