@@ -11,6 +11,6 @@ import com.fmdgroup.vatcher.model.JobOpportunity;
 
 public interface ChatRepository extends JpaRepository<Chat, Long>{
 	
-	List<JobOpportunity> findByOpportunityID(JobOpportunity opportunityID);
+	List<Chat> findByOpportunityID(JobOpportunity opportunityID);
 
 }
