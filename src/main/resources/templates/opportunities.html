@@ -31,7 +31,12 @@
 				 <p><strong>Location</strong>: <span th:text="${job.location}">Location</span></p>
 				 <p><strong>Duration:</strong> <span th:text="${job.duration}">Duration</span></p>
 				 <p><strong>Description:</strong> <span th:text="${job.description}">Description</span></p>
-				 <p><strong>Skills:</strong> <span th:text="${job.skills}">Skills</span></p>
+				 <p><strong>Skills:</strong> 
+<span th:each="skill,iterStat : ${job.skills}">
+  <span th:text="${skill}"/></span>
+  <span th:if="!iterStat.last">, </span>
+</span>
+</p>
 				  <p><strong>Status:</strong> <span th:text="${job.active ? 'Active' : 'Inactive'}">Status</span></p>
 				   <p><strong>Expiration Date:</strong> <span th:text="${job.expirationDate}">Expiration Date</span></p>
 				   <p th:text="${job.getJob_id()}"></p>
