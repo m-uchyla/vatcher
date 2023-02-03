@@ -61,8 +61,25 @@
 
 				</div>
 				<div class="action">
-					<i class="fa fa-heart heart" style="font-size: 4rem;"
-						aria-hidden="true"></i> <a
+
+					
+					<form th:action="@{/applyJobOpportunity/{id}(id=${job.getJob_id()})}" method="post">
+  <input type="hidden" name="traineeId" th:value="${trainee.getId()}"/>
+  <div class="action">
+    <button type="submit" class="fa heart" style="font-size: 4rem; background: transparent; border: none; outline: none;" onclick="submitForm(event)"></button>
+  </div>
+</form>
+
+<script>
+  function submitForm(event) {
+    event.preventDefault();
+    var form = event.target.form;
+    var xhr = new XMLHttpRequest();
+    xhr.open(form.method, form.action, true);
+    xhr.send(new FormData(form));
+  }
+</script> 
+					<a
 						th:href="@{/chat/(id=${job.getJob_id()})}"
 						class="fa fa-comment cross" style="font-size: 4rem;"
 						aria-hidden="true"></a>
