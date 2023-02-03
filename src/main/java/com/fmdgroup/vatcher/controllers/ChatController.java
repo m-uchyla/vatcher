@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fmdgroup.vatcher.model.Chat;
+import com.fmdgroup.vatcher.model.JobOpportunity;
+import com.fmdgroup.vatcher.model.Notifications;
 import com.fmdgroup.vatcher.model.SingleUser;
 import com.fmdgroup.vatcher.repositories.ChatRepository;
 import com.fmdgroup.vatcher.repositories.JobOpportunityRepository;
+import com.fmdgroup.vatcher.services.NotificationServiceImpl;
 import com.fmdgroup.vatcher.services.SingleUserDetailsService;
 
 @Controller
@@ -29,6 +32,8 @@ public class ChatController {
 	JobOpportunityRepository jobOpportunityRepository;
 	@Autowired
 	ChatRepository chatRepository;
+	@Autowired
+	NotificationServiceImpl notificationService;
 	
 //	@GetMapping("/chat")		//maps to the chat page and returns all messages in the chat. adds all messages
 //								// to the model and returns the chat view
@@ -53,13 +58,21 @@ public class ChatController {
 			@RequestParam("content") String content, 
 			@RequestParam("opportunityID") Long opportunityID
 			,Model model) {
-		Chat messageChat = new Chat(
-				userDetailsService.findUserFromCurrentSession(), 
-				content, 
-				jobOpportunityRepository.findById(opportunityID).get(),
-				new Date());
+		SingleUser user = userDetailsService.findUserFromCurrentSession();
+		JobOpportunity jobOpportunity = jobOpportunityRepository.findById(opportunityID).get();
+		Chat messageChat = new Chat(user, content, jobOpportunity,new Date());
 		messages.add(messageChat);
 		chatRepository.save(messageChat);
+		List<Chat> allMessagesChats = chatRepository.findByOpportunityID(jobOpportunity);
+		for(Chat mess : allMessagesChats) {
+			if(!mess.getSender().equals(user)) {
+				notificationService.addNotification(new Notifications(
+						"[NEW MESSAGE] by "+user.getName()+" in "+jobOpportunity.getJobTitle()+jobOpportunity.getCompany()+"!", 
+						mess.getSender(), 
+						new Date(), 
+						false));
+			}
+		}
 		System.out.println(messages);
 		return "redirect:/chat/?id="+opportunityID;
 	
