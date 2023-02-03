@@ -1,24 +1,57 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Chat</title>
-  </head>
-  <body>
-    <h1>Chat Page</h1>
-    <h3 th:text="${user.name}">User name</h3>
-    <form th:action="@{/chat/send}" method="post">
-      <input type="hidden" name="opportunityID" th:value="${opportunityID}" />
-      <input type="text" name="content" placeholder="Type your message" required />
-      <button type="submit">Send</button>
-    </form>
-    <hr />
-    <div th:each="message : ${messages}">
-      <p>	<span th:text="${message.timestamp}">Time</span>
-      		<strong th:text="${message.sender.name}">Sender</strong>: 
-      		<span th:text="${message.content}">Content</span></p>
-    </div>
-  </body>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>Chat</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet"
+	href="https:/cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+<body>
+	<nav>
+		<h1>VATCHER</h1>
+		<ul>
+			<li><a>Home</a></li>
+			<li><a>Opportunities</a></li>
+			<li><a>Profile</a></li>
+			<li><a th:href="@{/logout}">Logout</a></li>
+			<li><a class="fa fa-bell" aria-hidden="true"></a></li>
+		</ul>
+	</nav>
+
+	<div class=mainGrid>
+		<div class="card opportunity" style="flex-direction: column">
+
+			<h1>Chat Page</h1>
+			<h3 th:text="${user.name}">User name</h3>
+			<form th:action="@{/chat/send}" method="post">
+				<input type="hidden" name="opportunityID"
+					th:value="${opportunityID}" /> <input type="text" name="content"
+					placeholder="Type your message" required />
+				<button type="submit">Send</button>
+			</form>
+			<hr />
+
+
+			<div th:each="message : ${messages}">
+				<p>
+					<span th:text="${message.timestamp}">Time</span> <strong
+						th:text="${message.sender.name}">Sender</strong>: <span
+						th:text="${message.content}">Content</span>
+				</p>
+			</div>
+
+		</div>
+
+	</div>
+
+
+	<footer style="position: absolute; bottom: 0; width: 100%;">
+		<p>VATCHER 2023</p>
+	</footer>
+
+</body>
 </html>
