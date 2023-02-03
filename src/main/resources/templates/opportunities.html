@@ -66,7 +66,7 @@
 					<form th:action="@{/applyJobOpportunity/{id}(id=${job.getJob_id()})}" method="post">
   <input type="hidden" name="traineeId" th:value="${trainee.getId()}"/>
   <div class="action">
-    <button type="submit" class="fa heart" style="font-size: 4rem; background: transparent; border: none; outline: none;" onclick="submitForm(event)"></button>
+    <button type="submit" class="fa fa-heart heart" style="font-size: 4rem; background: transparent; border: none; outline: none;" onclick="submitForm(event)"></button>
   </div>
 </form>
 
