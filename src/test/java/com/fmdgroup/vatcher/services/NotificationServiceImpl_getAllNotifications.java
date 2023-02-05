@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,7 +17,7 @@ import com.fmdgroup.vatcher.model.Notifications;
 import com.fmdgroup.vatcher.repositories.NotificationsRepository;
 
 @ExtendWith(MockitoExtension.class)
-public class NotificationServiceImpl_addNotificationTest {
+public class NotificationServiceImpl_getAllNotifications {
 
     @InjectMocks
     private NotificationServiceImpl notificationServiceImpl;
@@ -23,11 +26,13 @@ public class NotificationServiceImpl_addNotificationTest {
     private NotificationsRepository notificationsRepository;
 
     @Test
-    public void testAddNotification() {
-        Notifications notification = new Notifications();
-        when(notificationsRepository.save(notification)).thenReturn(notification);
-        String addedNotification = notificationServiceImpl.addNotification(notification);
-        verify(notificationsRepository).save(notification);
-        assertEquals("notifications", addedNotification);
+    public void testGetAllNotifications() {
+        List<Notifications> notifications = new ArrayList<>();
+        notifications.add(new Notifications());
+        notifications.add(new Notifications());
+        when(notificationsRepository.findAll()).thenReturn(notifications);
+        List<Notifications> gotNotifications = notificationServiceImpl.getAllNotifications();
+        verify(notificationsRepository).findAll();
+        assertEquals(notifications, gotNotifications);
     }
 }
